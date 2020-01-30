@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.movietv.R
 import com.google.android.material.tabs.TabLayout
 
-class FragmentHome : Fragment(){
+class FragmentHome : Fragment() {
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
@@ -28,7 +28,9 @@ class FragmentHome : Fragment(){
         tabLayout!!.post(Runnable { tabLayout!!.setupWithViewPager(viewPager) })
         return view
     }
-    private inner class MyAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+    private inner class MyAdapter(fm: FragmentManager?) :
+        FragmentPagerAdapter(fm!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         private val int_items = 5
         override fun getItem(position: Int): Fragment {
             var fragment: Fragment? = null
@@ -38,6 +40,7 @@ class FragmentHome : Fragment(){
                 2 -> fragment = FragmentCategory()
                 3 -> fragment = FragmentCategory()
                 4 -> fragment = FragmentCategory()
+                5 -> fragment = FragmentCategory()
             }
             return fragment!!
         }
@@ -48,13 +51,12 @@ class FragmentHome : Fragment(){
 
         override fun getPageTitle(position: Int): CharSequence? {
             when (position) {
-                0 -> return "Popular"
-                1 -> return "Now Playing"
-                2 -> return "UpComing"
-                3 -> return "Top Rate"
-                4 -> return "Genres"
-
-
+                0 -> return "All"
+                1 -> return "Popular"
+                2 -> return "Now Playing"
+                3 -> return "UpComing"
+                4 -> return "Top Rate"
+                5 -> return "Genres"
             }
             return null
         }

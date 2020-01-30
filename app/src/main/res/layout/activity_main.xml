@@ -5,28 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.MainActivity">
+
     <FrameLayout
         android:id="@+id/frame_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        android:background="#0a0a0a"
+        app:tabIndicatorColor="#FFFFFF"
+        app:tabInlineLabel="true"
+        app:tabTextColor="#666666"
+        app:tabIconTint="#FFFFFF"
+        app:tabSelectedTextColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent">
-        <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:icon="@drawable/ic_home"/>
-        <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:icon="@drawable/ic_favorite_black_24dp" />
-        <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:icon="@drawable/ic_history_black_24dp" />
 
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:text="HOME" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:text="SEARCH" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_favorite_border_black_24dp"
+            android:text="FAVORITE" />
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

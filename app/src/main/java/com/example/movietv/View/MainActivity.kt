@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 //        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.replace(
             R.id.frame_home,
-            FragmentHome(), TAG).commit()
+            FragmentHome(), TAG
+        ).commit()
     }
 }
