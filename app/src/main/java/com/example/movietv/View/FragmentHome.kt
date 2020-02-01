@@ -31,16 +31,12 @@ class FragmentHome : Fragment() {
 
     private inner class MyAdapter(fm: FragmentManager?) :
         FragmentPagerAdapter(fm!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-        private val int_items = 5
+        private val int_items = 2
         override fun getItem(position: Int): Fragment {
             var fragment: Fragment? = null
             when (position) {
-                0 -> fragment = FragmentCategory()
-                1 -> fragment = FragmentCategory()
-                2 -> fragment = FragmentCategory()
-                3 -> fragment = FragmentCategory()
-                4 -> fragment = FragmentCategory()
-                5 -> fragment = FragmentCategory()
+                0 -> fragment = FragmentAll()
+                1 -> fragment = FragmentGenres()
             }
             return fragment!!
         }
@@ -51,12 +47,8 @@ class FragmentHome : Fragment() {
 
         override fun getPageTitle(position: Int): CharSequence? {
             when (position) {
-                0 -> return "All"
-                1 -> return "Popular"
-                2 -> return "Now Playing"
-                3 -> return "UpComing"
-                4 -> return "Top Rate"
-                5 -> return "Genres"
+                0 -> return "Movies"
+                1 -> return "Genres"
             }
             return null
         }
