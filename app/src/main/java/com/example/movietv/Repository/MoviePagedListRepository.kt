@@ -1,6 +1,7 @@
 package com.example.movietv.Repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.movietv.Model.Movie
@@ -12,8 +13,8 @@ class MoviePagedListRepository(private val apiService: ApiService) {
     lateinit var moviePagedList: LiveData<PagedList<Movie>>
     lateinit var moviesDataSourceFactory: MovieDataSourceFactory
 
-    fun fetchLiveMoviePagedList (compositeDisposable: CompositeDisposable) : LiveData<PagedList<Movie>> {
-        moviesDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable)
+    fun fetchLiveMoviePagedList (compositeDisposable: CompositeDisposable,type:Int) : LiveData<PagedList<Movie>> {
+        moviesDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable,type)
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -23,5 +24,9 @@ class MoviePagedListRepository(private val apiService: ApiService) {
         moviePagedList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
 
         return moviePagedList
+    }
+    fun getNetworkState(): LiveData<NetworkState> {
+        return Transformations.switchMap<MovieDataSource, NetworkState>(
+            moviesDataSourceFactory.movieLiveDataSource, MovieDataSource::networkState)
     }
 }

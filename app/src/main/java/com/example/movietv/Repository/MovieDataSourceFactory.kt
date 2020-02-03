@@ -9,12 +9,13 @@ import io.reactivex.disposables.CompositeDisposable
 //lấy dữ liệu bằng dataSource và pagedlist
 class MovieDataSourceFactory(
     private val apiService: ApiService,
-    private val compositeDisposable: CompositeDisposable): DataSource.Factory<Int, Movie>() {
+    private val compositeDisposable: CompositeDisposable,
+    private val type:Int
+) : DataSource.Factory<Int, Movie>() {
 
-    val movieLiveDataSource =  MutableLiveData<MovieDataSource>()
+    val movieLiveDataSource = MutableLiveData<MovieDataSource>()
     override fun create(): DataSource<Int, Movie> {
-        val movieDataSource = MovieDataSource(apiService,compositeDisposable)
-
+        val movieDataSource = MovieDataSource(apiService, compositeDisposable,type)
         movieLiveDataSource.postValue(movieDataSource)
         return movieDataSource
     }

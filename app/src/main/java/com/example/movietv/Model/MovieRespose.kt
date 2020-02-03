@@ -2,7 +2,7 @@ package com.example.movietv.Model
 
 import com.google.gson.annotations.SerializedName
 
-class MovieRespose(
+data class MovieRespose(
     val page: Int,
     @SerializedName("results")
     val movieList: List<Movie>,
