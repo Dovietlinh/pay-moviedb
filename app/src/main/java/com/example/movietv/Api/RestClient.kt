@@ -10,12 +10,12 @@ import java.util.concurrent.TimeUnit
 const val API_KEY = "1bf39cdc4ef9196254b01f85c1c05398"
 const val BASE_URL = "https://api.themoviedb.org/3/"
 
-const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342/"
+const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342"
 
 const val FIRST_PAGE = 1
 const val POST_PER_PAGE = 20
 
-object RestClient{
+object RestClient {
     fun getClient(): ApiService {
         val requestInterceptor = Interceptor { chain ->
             // Interceptor take only one argument which is a lambda function so parenthesis can be omitted
