@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 class MovieDataSourceFactory(
     private val apiService: ApiService,
     private val compositeDisposable: CompositeDisposable,
-    private val type:Int
+    private val type:String
 ) : DataSource.Factory<Int, Movie>() {
 
     val movieLiveDataSource = MutableLiveData<MovieDataSource>()

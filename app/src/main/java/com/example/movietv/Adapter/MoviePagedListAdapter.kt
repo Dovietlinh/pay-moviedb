@@ -1,9 +1,11 @@
 package com.example.movietv.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.movietv.Model.Movie
 import com.example.movietv.R
 import com.example.movietv.Repository.NetworkState
+import com.example.movietv.View.DetailsActivity
 import com.example.themoviedb.Api.POSTER_BASE_URL
 import kotlinx.android.synthetic.main.item_backdrop.view.*
 
@@ -71,9 +74,10 @@ class MoviePagedListAdapter(public val context: Context):PagedListAdapter<Movie,
                 .load(moviePosterURL)
                 .into(itemView.imgMovieCategory)
             itemView.setOnClickListener {
-                //                val intent = Intent(context, SingleMovie::class.java)
-//                intent.putExtra("id", movie?.id)
-//                context.startActivity(intent)
+//                Toast.makeText(context,movie!!.id.toString(),Toast.LENGTH_LONG).show()
+                val intent = Intent(context, DetailsActivity::class.java)
+                intent.putExtra("id", movie?.id)
+                context.startActivity(intent)
             }
 
         }

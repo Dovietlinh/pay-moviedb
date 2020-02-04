@@ -11,10 +11,16 @@ import io.reactivex.disposables.CompositeDisposable
 class MainActivityViewModel(private val moviePagedListRepository: MoviePagedListRepository):ViewModel() {
     private val compositeDisposable=CompositeDisposable()
     val  moviePagedList : LiveData<PagedList<Movie>> by lazy {
-        moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable,1)
+        moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable,"popular")
     }
     val  moviePagedListNowPlaying : LiveData<PagedList<Movie>> by lazy {
-        moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable,2)
+        moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable,"now_playing")
+    }
+    val  moviePagedListUpcoming : LiveData<PagedList<Movie>> by lazy {
+        moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable,"upcoming")
+    }
+    val  moviePagedListTopRate : LiveData<PagedList<Movie>> by lazy {
+        moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable,"top_rated")
     }
     val  networkState : LiveData<NetworkState> by lazy {
         moviePagedListRepository.getNetworkState()
