@@ -2,191 +2,222 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#111"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contentBanner"
+    <!--    <data>-->
+
+    <!--        <variable-->
+    <!--            name="movie"-->
+    <!--            type="com.example.movietv.Model.MovieDetails" />-->
+    <!--    </data>-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="#111"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageViewBanner"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="h,500:282"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/background_backdrop"
+                app:layout_constraintDimensionRatio="h,500:282"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imagePoster"
+                android:layout_width="110dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:background="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewBanner"
+                app:layout_constraintDimensionRatio="h,500:750"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/titleDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePoster"
+                app:layout_constraintTop_toTopOf="@+id/imagePoster" />
+
+            <TextView
+                android:id="@+id/taglineDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text=""
+                android:textColor="#CAC8C8"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePoster"
+                app:layout_constraintTop_toBottomOf="@+id/titleDetails" />
+
+            <TextView
+                android:id="@+id/titleGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Genre: "
+                android:textColor="#FFFFFF"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imagePoster"
+                app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
+
+            <TextView
+                android:id="@+id/genreDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Action, Comedy, Adventure"
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/titleGenre"
+                app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
+
+            <TextView
+                android:id="@+id/titleTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Runtime: "
+                android:textColor="#FFFFFF"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imagePoster"
+                app:layout_constraintTop_toBottomOf="@+id/titleGenre" />
+
+            <TextView
+                android:id="@+id/timeDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/titleTime"
+                app:layout_constraintTop_toBottomOf="@+id/genreDetails" />
+
+            <TextView
+                android:id="@+id/titleDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Date: "
+                android:textColor="#FFFFFF"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imagePoster"
+                app:layout_constraintTop_toBottomOf="@+id/titleTime" />
+
+            <TextView
+                android:id="@+id/dateDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{movie.releaseDate}"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/titleDate"
+                app:layout_constraintTop_toBottomOf="@+id/titleTime" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/ic_star_border_black_24dp"
+                app:layout_constraintStart_toEndOf="@+id/imagePoster"
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
+
+            <TextView
+                android:id="@+id/rateDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#FFFFFF"
+                android:textSize="14dp"
+                app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Overview"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtOverview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textViewVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Trailer"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/item_test"
-            android:src="@drawable/background_backdrop"
-            app:layout_constraintDimensionRatio="h,500:282"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewVideo" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#161616">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
-            android:layout_width="110dp"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/item_poster"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintDimensionRatio="h,500:750"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/titleDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Deadpool 2"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
-
-        <TextView
-            android:id="@+id/taglineDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Prepare for the Second Coming."
-            android:textColor="#CAC8C8"
-            android:textSize="16dp"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toBottomOf="@+id/titleDetails" />
-
-        <TextView
-            android:id="@+id/titleGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Genre: "
-            android:textColor="#FFFFFF"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
-
-        <TextView
-            android:id="@+id/genreDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Action, Comedy, Adventure"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
-            app:layout_constraintStart_toEndOf="@+id/titleGenre"
-            app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
-
-        <TextView
-            android:id="@+id/titleTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Runtime: "
-            android:textColor="#FFFFFF"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toBottomOf="@+id/titleGenre" />
-
-        <TextView
-            android:id="@+id/timeDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="121 minutes"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/titleTime"
-            app:layout_constraintTop_toBottomOf="@+id/genreDetails" />
-
-        <TextView
-            android:id="@+id/titleDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Date: "
-            android:textColor="#FFFFFF"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toBottomOf="@+id/titleTime" />
-
-        <TextView
-            android:id="@+id/dateDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="2018-05-10"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/titleDate"
-            app:layout_constraintTop_toBottomOf="@+id/titleTime" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:background="@drawable/ic_star_border_black_24dp"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
-
-        <TextView
-            android:id="@+id/rateDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="7.5"
-            android:textColor="#FFFFFF"
-            android:textSize="14dp"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-            app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Overview"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contentBanner" />
-
-    <TextView
-        android:id="@+id/txtOverview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:text="During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure."
-        android:textColor="#FFFFFF"
-        android:textSize="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textViewVideo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Trailer"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtOverview" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewVideo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

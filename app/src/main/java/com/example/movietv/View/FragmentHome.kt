@@ -5,52 +5,98 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movietv.Adapter.MoviePagedListAdapter
+import com.example.movietv.Model.Movie
 import com.example.movietv.R
-import com.google.android.material.tabs.TabLayout
+import com.example.movietv.Repository.MoviePagedListRepository
+import com.example.movietv.ViewModel.MainActivityViewModel
+import com.example.themoviedb.Api.ApiService
+import com.example.themoviedb.Api.RestClient
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class FragmentHome : Fragment() {
-
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
-
+    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var movieListAdapter: MoviePagedListAdapter
+    private lateinit var movieRepository: MoviePagedListRepository
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        tabLayout = view.findViewById(R.id.tabs) as TabLayout
-        viewPager = view.findViewById(R.id.viewpager) as ViewPager
-        viewPager!!.setAdapter(MyAdapter(fragmentManager))
-        tabLayout!!.post(Runnable { tabLayout!!.setupWithViewPager(viewPager) })
-        return view
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    private inner class MyAdapter(fm: FragmentManager?) :
-        FragmentPagerAdapter(fm!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-        private val int_items = 2
-        override fun getItem(position: Int): Fragment {
-            var fragment: Fragment? = null
-            when (position) {
-                0 -> fragment = FragmentAll()
-                1 -> fragment = FragmentGenres()
-            }
-            return fragment!!
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initAdapter()
+    }
 
-        override fun getCount(): Int {
-            return int_items
+    private fun initAdapter() {
+        val apiService: ApiService = RestClient.getClient()
+        movieRepository = MoviePagedListRepository(apiService)
+        viewModel = getViewModel()
+        //set Adapter movieList popular
+        movieListAdapter = MoviePagedListAdapter(context!!)
+        val linearLayoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        rcv_popular?.apply {
+            this.setHasFixedSize(true)
+            this.layoutManager = linearLayoutManager
+            this.itemAnimator = DefaultItemAnimator()
+            this.adapter = movieListAdapter
         }
+        viewModel.moviePagedList.observe(viewLifecycleOwner, Observer<PagedList<Movie>> {
+            movieListAdapter.submitList(it)
+        })
+        //set Adapter movieList now playing
+        val movieListAdapterNowPlaying = MoviePagedListAdapter(context!!)
+        rcv_nowPlaying?.apply {
+            this.setHasFixedSize(true)
+            this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            this.itemAnimator = DefaultItemAnimator()
+            this.adapter = movieListAdapterNowPlaying
+        }
+        viewModel.moviePagedListNowPlaying.observe(viewLifecycleOwner, Observer<PagedList<Movie>> {
+            movieListAdapterNowPlaying.submitList(it)
+        })
+        //set Adapter movieList upcoming
+        val movieListAdapterUpcoming = MoviePagedListAdapter(context!!)
+        rcv_upcoming?.apply {
+            this.setHasFixedSize(true)
+            this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            this.itemAnimator = DefaultItemAnimator()
+            this.adapter = movieListAdapterUpcoming
+        }
+        viewModel.moviePagedListUpcoming.observe(viewLifecycleOwner, Observer<PagedList<Movie>> {
+            movieListAdapterUpcoming.submitList(it)
+        })
+        //set Adapter movieList topRate
+        val movieListAdapterTopRate = MoviePagedListAdapter(context!!)
+        rcv_topRate?.apply {
+            this.setHasFixedSize(true)
+            this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            this.itemAnimator = DefaultItemAnimator()
+            this.adapter = movieListAdapterTopRate
+        }
+        viewModel.moviePagedListTopRate.observe(viewLifecycleOwner, Observer<PagedList<Movie>> {
+            movieListAdapterTopRate.submitList(it)
+        })
+    }
 
-        override fun getPageTitle(position: Int): CharSequence? {
-            when (position) {
-                0 -> return "Movies"
-                1 -> return "Genres"
+    private fun getViewModel(): MainActivityViewModel {
+        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
+                return MainActivityViewModel(movieRepository) as T
             }
-            return null
-        }
+        })[MainActivityViewModel::class.java]
     }
 }
