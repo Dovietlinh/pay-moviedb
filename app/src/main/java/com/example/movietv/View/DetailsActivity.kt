@@ -2,6 +2,7 @@ package com.example.movietv.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -11,7 +12,6 @@ import com.example.movietv.Model.MovieDetails
 import com.example.movietv.R
 import com.example.movietv.Repository.MovieDetailsRepository
 import com.example.movietv.ViewModel.DetailsActivityViewModel
-import com.example.movietv.ViewModel.MainActivityViewModel
 import com.example.themoviedb.Api.POSTER_BASE_URL
 import com.example.themoviedb.Api.RestClient
 import kotlinx.android.synthetic.main.activity_details.*
@@ -25,6 +25,7 @@ class DetailsActivity : AppCompatActivity() {
         init()
         viewModel.movieDetails.observe(this, Observer {
             loadDataView(it)
+            progress_bar.visibility= View.GONE
         })
     }
     fun init(){
@@ -32,8 +33,9 @@ class DetailsActivity : AppCompatActivity() {
         val apiService=RestClient.getClient()
         movieRepository= MovieDetailsRepository(apiService)
         viewModel=getViewModel(movieId)
+        progress_bar.visibility= View.VISIBLE
     }
-    fun loadDataView(moviewDetails:MovieDetails){
+    fun loadDataView(moviewDetails: MovieDetails){
         titleDetails.text=moviewDetails.title
         taglineDetails.text=moviewDetails.tagline
         timeDetails.text=moviewDetails.runtime.toString() +" minutes"

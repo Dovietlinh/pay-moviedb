@@ -64,6 +64,7 @@ class FragmentCategory : Fragment() {
         }
         viewModel.moviePagedList.observe(viewLifecycleOwner, Observer <PagedList<Movie>>{
             movieListAdapter.submitList(it)
+            progress_bar.visibility=View.GONE
         })
     }
     private fun getViewModel(): MainActivityViewModel {
