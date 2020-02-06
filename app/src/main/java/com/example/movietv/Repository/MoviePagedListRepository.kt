@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 class MoviePagedListRepository(private val apiService: ApiService) {
     private lateinit var moviePagedList: LiveData<PagedList<Movie>>
     private lateinit var moviesDataSourceFactory: MovieDataSourceFactory
+    private lateinit var moviesSearchDataSourceFactory: MovieSearchDataSourceFactory
 
     fun fetchLiveMoviePagedList(
         compositeDisposable: CompositeDisposable,
@@ -24,6 +25,21 @@ class MoviePagedListRepository(private val apiService: ApiService) {
             .build()
 
         moviePagedList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
+
+        return moviePagedList
+    }
+    fun fetchLiveMovieSeachPagedList(
+        compositeDisposable: CompositeDisposable,
+        searchString: String
+    ): LiveData<PagedList<Movie>> {
+        moviesSearchDataSourceFactory = MovieSearchDataSourceFactory(apiService, compositeDisposable, searchString)
+
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setPageSize(POST_PER_PAGE)
+            .build()
+
+        moviePagedList = LivePagedListBuilder(moviesSearchDataSourceFactory, config).build()
 
         return moviePagedList
     }

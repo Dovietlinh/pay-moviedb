@@ -14,6 +14,9 @@ class MainActivityViewModel(private val moviePagedListRepository: MoviePagedList
     val moviePagedList: LiveData<PagedList<Movie>> by lazy {
         moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable, Constants.API_POPULAR)
     }
+    fun movieSearchPagedList(searchString:String): LiveData<PagedList<Movie>> {
+        return moviePagedListRepository.fetchLiveMovieSeachPagedList(compositeDisposable, searchString)
+    }
     val moviePagedListNowPlaying: LiveData<PagedList<Movie>> by lazy {
         moviePagedListRepository.fetchLiveMoviePagedList(
             compositeDisposable,
