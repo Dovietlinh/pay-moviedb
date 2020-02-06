@@ -1,20 +1,22 @@
 package com.example.movietv.Repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.example.movietv.Api.ApiService
 import com.example.movietv.Common.Constants.Companion.POST_PER_PAGE
 import com.example.movietv.Model.Movie
-import com.example.themoviedb.Api.ApiService
 import io.reactivex.disposables.CompositeDisposable
 
 class MoviePagedListRepository(private val apiService: ApiService) {
-    lateinit var moviePagedList: LiveData<PagedList<Movie>>
-    lateinit var moviesDataSourceFactory: MovieDataSourceFactory
+    private lateinit var moviePagedList: LiveData<PagedList<Movie>>
+    private lateinit var moviesDataSourceFactory: MovieDataSourceFactory
 
-    fun fetchLiveMoviePagedList (compositeDisposable: CompositeDisposable,type:String) : LiveData<PagedList<Movie>> {
-        moviesDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable,type)
+    fun fetchLiveMoviePagedList(
+        compositeDisposable: CompositeDisposable,
+        type: String
+    ): LiveData<PagedList<Movie>> {
+        moviesDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable, type)
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -25,8 +27,10 @@ class MoviePagedListRepository(private val apiService: ApiService) {
 
         return moviePagedList
     }
-    fun getNetworkState(): LiveData<NetworkState> {
-        return Transformations.switchMap<MovieDataSource, NetworkState>(
-            moviesDataSourceFactory.movieLiveDataSource, MovieDataSource::networkState)
-    }
+
+//    fun getNetworkState(): LiveData<NetworkState> {
+//        return Transformations.switchMap<MovieDataSource, NetworkState>(
+//            moviesDataSourceFactory.movieLiveDataSource, MovieDataSource::networkState
+//        )
+//    }
 }

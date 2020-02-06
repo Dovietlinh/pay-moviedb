@@ -9,38 +9,38 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpagerHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabGravity="fill"
         android:background="#0a0a0a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tabGravity="fill"
+        app:tabIconTint="#FFFFFF"
         app:tabIndicatorColor="#FFFFFF"
         app:tabInlineLabel="true"
-        app:tabTextColor="#666666"
-        app:tabIconTint="#FFFFFF"
         app:tabSelectedTextColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tabHome"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/ic_home_black_24dp"-->
-<!--            android:text="HOME" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tabSearch"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/ic_search_black_24dp"-->
-<!--            android:text="SEARCH" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/tabFavorite"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/ic_favorite_border_black_24dp"-->
-<!--            android:text="FAVORITE" />-->
+        app:tabTextColor="#666666">
+        <!--        <com.google.android.material.tabs.TabItem-->
+        <!--            android:id="@+id/tabHome"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:icon="@drawable/ic_home_black_24dp"-->
+        <!--            android:text="HOME" />-->
+        <!--        <com.google.android.material.tabs.TabItem-->
+        <!--            android:id="@+id/tabSearch"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:icon="@drawable/ic_search_black_24dp"-->
+        <!--            android:text="SEARCH" />-->
+        <!--        <com.google.android.material.tabs.TabItem-->
+        <!--            android:id="@+id/tabFavorite"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:icon="@drawable/ic_favorite_border_black_24dp"-->
+        <!--            android:text="FAVORITE" />-->
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.example.movietv.Model
 
 import com.google.gson.annotations.SerializedName

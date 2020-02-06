@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.example.movietv.Repository
 
 enum class Status {
@@ -12,9 +14,9 @@ class NetworkState(val status: Status, val msg: String) {
     companion object {
 
         val LOADED: NetworkState
-        val LOADING: NetworkState
-        val ERROR: NetworkState
-        val ENDOFLIST: NetworkState
+        private val LOADING: NetworkState
+        private val ERROR: NetworkState
+        private val ENDOFLIST: NetworkState
 
         init {
             LOADED = NetworkState(Status.SUCCESS, "Success")

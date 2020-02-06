@@ -1,15 +1,14 @@
 package com.example.movietv.Repository
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
+import com.example.movietv.Api.ApiService
 import com.example.movietv.Common.Constants.Companion.FIRST_PAGE
 import com.example.movietv.Model.Movie
-import com.example.themoviedb.Api.ApiService
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MovieSearchDataSource (
+class MovieSearchDataSource(
     private val apiService: ApiService,
     private val compositeDisposable: CompositeDisposable,
     private val searchString: String
@@ -39,7 +38,6 @@ class MovieSearchDataSource (
                 .subscribe({
                     if (it.totalPages >= params.key) {
                         callback.onResult(it.movieList, params.key + 1)
-                    } else {
                     }
                 },
                     {

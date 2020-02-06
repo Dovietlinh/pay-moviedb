@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     android:background="#141414"
     android:orientation="vertical"
-    tools:context=".View.MainActivity">
+    tools:context=".View.MainActivity"
+    tools:ignore="Overdraw">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="#363333"
         android:orientation="horizontal"
         android:weightSum="10"
-        android:layout_margin="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,7 +27,8 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_search_black_24dp"></ImageView>
+            android:background="@drawable/ic_search_black_24dp"
+            tools:ignore="ContentDescription" />
 
         <EditText
             android:id="@+id/edtSearchMulti"
@@ -35,9 +37,10 @@
             android:layout_gravity="center"
             android:layout_weight="9"
             android:background="#363333"
-            android:hint="Search for a movie, genre,..."
+            android:hint="@string/hint_search"
             android:textColor="#FFFFFF"
-            android:textColorHint="#DFDADA"></EditText>
+            android:textColorHint="#DFDADA"
+            tools:ignore="Autofill,TextFields" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

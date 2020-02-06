@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!--    <data>-->
-
-    <!--        <variable-->
-    <!--            name="movie"-->
-    <!--            type="com.example.movietv.Model.MovieDetails" />-->
-    <!--    </data>-->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -30,7 +24,8 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="h,500:282"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -38,7 +33,8 @@
                 android:src="@drawable/background_backdrop"
                 app:layout_constraintDimensionRatio="h,500:282"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imagePoster"
@@ -58,46 +54,46 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text=""
                 android:textColor="#FFFFFF"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toTopOf="@+id/imagePoster" />
+                app:layout_constraintTop_toTopOf="@+id/imagePoster"
+                tools:ignore="SpUsage,UnusedAttribute" />
 
             <TextView
                 android:id="@+id/taglineDetails"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text=""
                 android:textColor="#CAC8C8"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/titleDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/titleDetails"
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:id="@+id/titleGenre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Genre: "
+                android:text="@string/genre"
                 android:textColor="#FFFFFF"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/taglineDetails"
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:id="@+id/genreDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Action, Comedy, Adventure"
                 android:textColor="#FFFFFF"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/titleGenre"
                 app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
 
@@ -106,12 +102,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Runtime: "
+                android:text="@string/runtime"
                 android:textColor="#FFFFFF"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/titleGenre" />
+                app:layout_constraintTop_toBottomOf="@+id/titleGenre"
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:id="@+id/timeDetails"
@@ -128,19 +125,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Date: "
+                android:text="@string/date"
                 android:textColor="#FFFFFF"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/titleTime" />
+                app:layout_constraintTop_toBottomOf="@+id/titleTime"
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:id="@+id/dateDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@{movie.releaseDate}"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/titleDate"
@@ -153,7 +150,8 @@
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/ic_star_border_black_24dp"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails"
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:id="@+id/rateDetails"
@@ -163,7 +161,8 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14dp"
                 app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails"
+                tools:ignore="SpUsage" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -171,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Overview"
+            android:text="@string/overview"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -181,16 +180,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            android:text=""
+            android:text="@string/hint_search"
             android:textColor="#FFFFFF"
-            android:textSize="14dp" />
+            android:textSize="14sp"
+            tools:ignore="UnusedAttribute" />
 
         <TextView
             android:id="@+id/textViewVideo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Trailer"
+            android:text="@string/trailer"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />

@@ -1,4 +1,6 @@
-package com.example.themoviedb.Api
+@file:Suppress("PackageName")
+
+package com.example.movietv.Api
 
 import com.example.movietv.Common.Constants.Companion.API_KEY
 import com.example.movietv.Common.Constants.Companion.BASE_URL

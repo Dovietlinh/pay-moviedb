@@ -13,12 +13,12 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietv.Adapter.MoviePagedListAdapter
+import com.example.movietv.Api.ApiService
+import com.example.movietv.Api.RestClient
 import com.example.movietv.Model.Movie
 import com.example.movietv.R
 import com.example.movietv.Repository.MoviePagedListRepository
 import com.example.movietv.ViewModel.MainActivityViewModel
-import com.example.themoviedb.Api.ApiService
-import com.example.themoviedb.Api.RestClient
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class FragmentHome : Fragment() {

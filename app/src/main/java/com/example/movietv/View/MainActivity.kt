@@ -1,8 +1,10 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.example.movietv.View
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.movietv.Adapter.ViewPagerAdapter
@@ -18,8 +20,7 @@ import com.example.movietv.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    internal lateinit var viewpageradapter: ViewPagerAdapter
-    private val TAG = "Home"
+    private lateinit var viewpageradapter: ViewPagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,14 +46,14 @@ class MainActivity : AppCompatActivity() {
         chooseCategory(API_TOPRATE, STRING_TITLE_TOPRATE)
     }
 
-    fun chooseCategory(type: String, title: String) {
+    private fun chooseCategory(type: String, title: String) {
         val b = Bundle()
         b.putString("type", type)
         b.putString("title", title)
         val mFragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = mFragmentManager.beginTransaction()
         val fragmentCategory = FragmentCategory()
-        fragmentCategory.setArguments(b)
+        fragmentCategory.arguments = b
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.replace(
             R.id.frame_home,

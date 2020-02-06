@@ -3,8 +3,8 @@ package com.example.movietv.Repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.movietv.Api.ApiService
 import com.example.movietv.Model.MovieDetails
-import com.example.themoviedb.Api.ApiService
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 

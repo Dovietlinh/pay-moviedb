@@ -1,4 +1,6 @@
-package com.example.themoviedb.Api
+@file:Suppress("PackageName")
+
+package com.example.movietv.Api
 
 import com.example.movietv.Model.MovieDetails
 import com.example.movietv.Model.MovieRespose
