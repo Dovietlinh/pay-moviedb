@@ -6,37 +6,61 @@ import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.movietv.Adapter.ViewPagerAdapter
+import com.example.movietv.Common.Constants.Companion.API_NOW_PLAYING
+import com.example.movietv.Common.Constants.Companion.API_POPULAR
+import com.example.movietv.Common.Constants.Companion.API_TOPRATE
+import com.example.movietv.Common.Constants.Companion.API_UPCOMING
+import com.example.movietv.Common.Constants.Companion.STRING_TITLE_NOW_PLAYING
+import com.example.movietv.Common.Constants.Companion.STRING_TITLE_POPULAR
+import com.example.movietv.Common.Constants.Companion.STRING_TITLE_TOPRATE
+import com.example.movietv.Common.Constants.Companion.STRING_TITLE_UPCOMING
 import com.example.movietv.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     internal lateinit var viewpageradapter: ViewPagerAdapter
     private val TAG = "Home"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val mFragmentManager: FragmentManager = supportFragmentManager
-//        val fragmentTransaction: FragmentTransaction = mFragmentManager.beginTransaction()
-////        fragmentTransaction.addToBackStack(null)
-//        fragmentTransaction.replace(
-//            R.id.frame_home,
-//            FragmentHome(), TAG
-//        ).commit()
+        viewpageradapter = ViewPagerAdapter(supportFragmentManager)
 
-        viewpageradapter= ViewPagerAdapter(supportFragmentManager)
-
-        this.viewpagerHome.adapter=viewpageradapter
+        this.viewpagerHome.adapter = viewpageradapter
         this.tabContainer.setupWithViewPager(this.viewpagerHome)
-
     }
 
-    fun choosePopular(view: View){
+    fun choosePopular(view: View) {
+        chooseCategory(API_POPULAR, STRING_TITLE_POPULAR)
+    }
+
+    fun chooseNowPlaying(view: View) {
+        chooseCategory(API_NOW_PLAYING, STRING_TITLE_NOW_PLAYING)
+    }
+
+    fun chooseUpcoming(view: View) {
+        chooseCategory(API_UPCOMING, STRING_TITLE_UPCOMING)
+    }
+
+    fun chooseTopRate(view: View) {
+        chooseCategory(API_TOPRATE, STRING_TITLE_TOPRATE)
+    }
+
+    fun chooseCategory(type: String, title: String) {
+        val b = Bundle()
+        b.putString("type", type)
+        b.putString("title", title)
         val mFragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = mFragmentManager.beginTransaction()
+        val fragmentCategory = FragmentCategory()
+        fragmentCategory.setArguments(b)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.replace(
             R.id.frame_home,
-            FragmentCategory(), TAG
+            fragmentCategory
         ).commit()
+    }
+
+    fun backFragmentHome(view: View) {
+        onBackPressed()
     }
 }

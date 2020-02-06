@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.movietv.View.FragmentHome
 import com.example.movietv.View.FragmentCategory
 import com.example.movietv.View.FragmentGenres
+import com.example.movietv.View.FragmentSearch
 
 class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
@@ -13,11 +14,11 @@ class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         if (position == 0) {
             fragment = FragmentHome()
         } else if (position == 1) {
-            fragment = FragmentGenres()
+            fragment = FragmentSearch()
         } else if (position == 2) {
-            fragment = FragmentCategory()
+            fragment = FragmentSearch()
         } else if (position == 3) {
-            fragment = FragmentHome()
+            fragment = FragmentSearch()
         }
         return fragment as Fragment
     }

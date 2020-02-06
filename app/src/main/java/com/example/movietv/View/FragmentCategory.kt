@@ -1,10 +1,12 @@
 package com.example.movietv.View
 
 import android.content.Context
+import android.icu.text.CaseMap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -27,6 +29,8 @@ class FragmentCategory : Fragment() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var movieListAdapter: MoviePagedListAdapter
     private lateinit var movieRepository: MoviePagedListRepository
+    private var type:String?=null
+    private var title:String?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,19 +38,20 @@ class FragmentCategory : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_category, container, false)
+        type = this.arguments!!.getString("type")
+        title = this.arguments!!.getString("title")
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdapter()
+        initAdapter(type,title)
     }
-    private fun initAdapter(){
-//        var rcvCategory : RecyclerView? = view?.findViewById(R.id.rcvCategory)
+    private fun initAdapter(type:String?,title: String?){
         val apiService : ApiService = RestClient.getClient()
         movieRepository = MoviePagedListRepository(apiService)
         viewModel= getViewModel()
-
+        progress_bar.visibility=View.VISIBLE
         movieListAdapter=MoviePagedListAdapter(context!!)
         val gridLayoutManager=GridLayoutManager(context,3)
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -62,7 +67,8 @@ class FragmentCategory : Fragment() {
             this.itemAnimator=DefaultItemAnimator()
             this.adapter=movieListAdapter
         }
-        viewModel.moviePagedList.observe(viewLifecycleOwner, Observer <PagedList<Movie>>{
+        txtTitleCategory.text=title
+        viewModel.moviePageListCategory(type as String).observe(viewLifecycleOwner, Observer <PagedList<Movie>>{
             movieListAdapter.submitList(it)
             progress_bar.visibility=View.GONE
         })

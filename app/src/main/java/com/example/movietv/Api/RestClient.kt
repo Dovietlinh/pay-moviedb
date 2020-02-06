@@ -1,5 +1,7 @@
 package com.example.themoviedb.Api
 
+import com.example.movietv.Common.Constants.Companion.API_KEY
+import com.example.movietv.Common.Constants.Companion.BASE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -7,13 +9,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val API_KEY = "1bf39cdc4ef9196254b01f85c1c05398"
-const val BASE_URL = "https://api.themoviedb.org/3/"
-
-const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342"
-
-const val FIRST_PAGE = 1
-const val POST_PER_PAGE = 20
 
 object RestClient {
     fun getClient(): ApiService {

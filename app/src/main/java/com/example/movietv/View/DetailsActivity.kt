@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.example.movietv.Common.Constants.Companion.POSTER_BASE_URL
 import com.example.movietv.Model.MovieDetails
 import com.example.movietv.R
 import com.example.movietv.Repository.MovieDetailsRepository
 import com.example.movietv.ViewModel.DetailsActivityViewModel
-import com.example.themoviedb.Api.POSTER_BASE_URL
 import com.example.themoviedb.Api.RestClient
 import kotlinx.android.synthetic.main.activity_details.*
 
