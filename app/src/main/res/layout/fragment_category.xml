@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#141414"
+    android:background="@color/colorBackground"
     tools:ignore="Overdraw">
 
     <ImageView
@@ -28,7 +28,7 @@
         android:gravity="center"
         android:paddingVertical="10sp"
         android:text="@string/category"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00FFFFFF" />
+        android:background="@color/colorBackgroundViewPager" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvCategory"
@@ -54,7 +54,7 @@
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#161616"
+        android:background="@color/colorBackground"
         android:visibility="gone">
 
         <ProgressBar

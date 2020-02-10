@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#111"
+        android:background="@color/colorBackground"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +21,7 @@
                 android:id="@+id/imageViewBanner"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="#FFFFFF"
+                android:background="@color/colorWhite"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="h,500:282"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +43,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
                 android:layout_marginStart="10dp"
-                android:background="#FFFFFF"
+                android:background="@color/colorBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewBanner"
                 app:layout_constraintDimensionRatio="h,500:750"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,25 +55,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toTopOf="@+id/imagePoster"
-                tools:ignore="SpUsage,UnusedAttribute" />
+                app:layout_constraintTop_toTopOf="@+id/imagePoster" />
 
             <TextView
                 android:id="@+id/taglineDetails"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:textColor="#CAC8C8"
+                android:textColor="@color/colorTagline"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/titleDetails"
-                tools:ignore="UnusedAttribute" />
+                app:layout_constraintTop_toBottomOf="@+id/titleDetails" />
 
             <TextView
                 android:id="@+id/titleGenre"
@@ -80,19 +79,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/genre"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/taglineDetails"
-                tools:ignore="UnusedAttribute" />
+                app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
 
             <TextView
                 android:id="@+id/genreDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/titleGenre"
                 app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
@@ -103,19 +101,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/runtime"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/titleGenre"
-                tools:ignore="UnusedAttribute" />
+                app:layout_constraintTop_toBottomOf="@+id/titleGenre" />
 
             <TextView
                 android:id="@+id/timeDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/titleTime"
                 app:layout_constraintTop_toBottomOf="@+id/genreDetails" />
@@ -126,19 +123,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="@string/date"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/titleTime"
-                tools:ignore="UnusedAttribute" />
+                app:layout_constraintTop_toBottomOf="@+id/titleTime" />
 
             <TextView
                 android:id="@+id/dateDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/titleDate"
                 app:layout_constraintTop_toBottomOf="@+id/titleTime" />
@@ -150,19 +146,17 @@
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/ic_star_border_black_24dp"
                 app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                app:layout_constraintTop_toBottomOf="@+id/dateDetails"
-                tools:ignore="UnusedAttribute" />
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
 
             <TextView
                 android:id="@+id/rateDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textColor="#FFFFFF"
-                android:textSize="14dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-                app:layout_constraintTop_toBottomOf="@+id/dateDetails"
-                tools:ignore="SpUsage" />
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -171,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/overview"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorWhite"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -181,9 +175,8 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
             android:text="@string/hint_search"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            tools:ignore="UnusedAttribute" />
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textViewVideo"
@@ -191,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/trailer"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorWhite"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -208,8 +201,8 @@
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="#161616">
+        android:background="@color/colorBackground"
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"
