@@ -17,5 +17,6 @@ class Constants {
         const val TYPE_MOVIE ="type"
         const val TITLE_CATEGORY ="title"
         const val IS_UPCOMING_DISPLAYED ="is_upcoming_displayed"
+        const val DB_NAME = "movieTV_db"
     }
 }

@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewpageradapter = ViewPagerAdapter(supportFragmentManager)
-
+        viewpageradapter = ViewPagerAdapter(supportFragmentManager,this@MainActivity)
         viewpagerHome.adapter = viewpageradapter
         tabContainer.setupWithViewPager(viewpagerHome)
     }

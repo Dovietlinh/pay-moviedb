@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movietv.R
 import com.example.movietv.adapter.MoviePagedListAdapter
-import com.example.movietv.model.Genre
+import com.example.movietv.model.remote.Genre
 import com.example.movietv.viewModel.GenreViewModel
 
 class GenresFragment : Fragment() {
@@ -35,7 +35,7 @@ class GenresFragment : Fragment() {
         return view
     }
 
-    fun initView(viewGroup: LinearLayout) {
+    private fun initView(viewGroup: LinearLayout) {
         viewModel = getViewModel()
         viewModel.genreList.observe(viewLifecycleOwner, Observer {
             for (genre in it.genreList) {
@@ -44,8 +44,8 @@ class GenresFragment : Fragment() {
         })
     }
 
-    fun addViewGenre(genre: Genre, viewGroup: LinearLayout) {
-        var params: RecyclerView.LayoutParams = RecyclerView.LayoutParams(
+    private fun addViewGenre(genre: Genre, viewGroup: LinearLayout) {
+        val params: RecyclerView.LayoutParams = RecyclerView.LayoutParams(
             RecyclerView.LayoutParams.MATCH_PARENT, 180
         )
         params.topMargin = 20
@@ -53,7 +53,7 @@ class GenresFragment : Fragment() {
         recyclerView.layoutParams = params
 //        recyclerView.setBackgroundColor(Color.parseColor("#FFFFFF"))
         val movieListAdapterGenre = MoviePagedListAdapter(context!!)
-        recyclerView?.apply {
+        recyclerView.apply {
             this.setHasFixedSize(true)
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             this.itemAnimator = DefaultItemAnimator()

@@ -6,11 +6,11 @@ import androidx.paging.PagedList
 import com.example.movietv.api.ApiService
 import com.example.movietv.api.RestClient
 import com.example.movietv.common.Constants
-import com.example.movietv.model.Movie
+import com.example.movietv.model.remote.Movie
 import com.example.movietv.repository.MoviePagedListRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class MovieViewModel() :
+class MovieViewModel :
     ViewModel() {
     private val compositeDisposable = CompositeDisposable()
     val apiService: ApiService = RestClient.getClient()

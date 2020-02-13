@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.movietv.api.ApiService
 import com.example.movietv.common.Constants.Companion.POST_PER_PAGE
-import com.example.movietv.model.Movie
+import com.example.movietv.model.remote.Movie
 import io.reactivex.disposables.CompositeDisposable
 
 class MoviePagedListRepository(private val apiService: ApiService) {
@@ -23,7 +23,6 @@ class MoviePagedListRepository(private val apiService: ApiService) {
             .build()
 
         moviePagedList = LivePagedListBuilder(moviesDataSourceFactory, config).build()
-
         return moviePagedList
     }
 

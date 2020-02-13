@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietv.R
 import com.example.movietv.adapter.MoviePagedListAdapter
 import com.example.movietv.common.Constants
-import com.example.movietv.model.Movie
+import com.example.movietv.model.remote.Movie
 import com.example.movietv.viewModel.MovieViewModel
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -37,7 +37,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
     }
-
     private fun initAdapter() {
         viewModel = getViewModel()
         //set Adapter movieList popular
@@ -112,7 +111,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun getViewModel(): MovieViewModel {
+    private fun getViewModel(): MovieViewModel{
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")

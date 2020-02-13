@@ -1,5 +1,6 @@
-package com.example.movietv.model
+package com.example.movietv.model.remote
 
+import com.example.movietv.model.remote.Movie
 import com.google.gson.annotations.SerializedName
 
 data class MovieRespose(

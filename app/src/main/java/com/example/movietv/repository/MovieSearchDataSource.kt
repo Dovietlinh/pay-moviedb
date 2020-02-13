@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.example.movietv.api.ApiService
 import com.example.movietv.common.Constants.Companion.FIRST_PAGE
-import com.example.movietv.model.Movie
+import com.example.movietv.model.remote.Movie
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 

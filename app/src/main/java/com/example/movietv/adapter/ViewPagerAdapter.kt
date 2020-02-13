@@ -1,14 +1,17 @@
 package com.example.movietv.adapter
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.movietv.R
 import com.example.movietv.view.GenresFragment
 import com.example.movietv.view.HomeFragment
 import com.example.movietv.view.SearchFragment
 
 
-class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class ViewPagerAdapter(fm: FragmentManager,vContext: Context) : FragmentPagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private val context:Context=vContext
     override fun getItem(position: Int): Fragment {
         var fragment: Fragment? = null
         when (position) {
@@ -27,10 +30,10 @@ class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence? {
         var title: String? = null
         when (position) {
-            0 -> title = "Home"
-            1 -> title = "Genre"
-            2 -> title = "Search"
-            3 -> title = "Favorite"
+            0 -> title = context.getString(R.string.home)
+            1 -> title = context.getString(R.string.genre_title)
+            2 -> title = context.getString(R.string.search)
+            3 -> title = context.getString(R.string.favorite)
         }
         return title
     }

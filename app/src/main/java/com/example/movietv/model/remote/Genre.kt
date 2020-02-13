@@ -1,4 +1,4 @@
-package com.example.movietv.model
+package com.example.movietv.model.remote
 
 import com.google.gson.annotations.SerializedName
 

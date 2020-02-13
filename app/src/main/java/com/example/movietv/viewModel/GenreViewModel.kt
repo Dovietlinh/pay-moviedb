@@ -3,7 +3,7 @@ package com.example.movietv.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.movietv.api.RestClient
-import com.example.movietv.model.GenreRespose
+import com.example.movietv.model.remote.GenreRespose
 import com.example.movietv.repository.GenreRepository
 import io.reactivex.disposables.CompositeDisposable
 

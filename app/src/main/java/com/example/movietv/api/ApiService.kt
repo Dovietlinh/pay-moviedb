@@ -1,8 +1,8 @@
 package com.example.movietv.api
 
-import com.example.movietv.model.GenreRespose
-import com.example.movietv.model.MovieDetails
-import com.example.movietv.model.MovieRespose
+import com.example.movietv.model.remote.GenreRespose
+import com.example.movietv.model.remote.MovieDetails
+import com.example.movietv.model.remote.MovieRespose
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

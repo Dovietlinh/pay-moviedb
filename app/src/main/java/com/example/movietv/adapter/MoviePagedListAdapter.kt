@@ -14,7 +14,7 @@ import com.example.movietv.common.Constants.Companion.MOVIE_ID
 import com.example.movietv.common.Constants.Companion.MOVIE_VIEW_TYPE
 import com.example.movietv.common.Constants.Companion.NETWORK_VIEW_TYPE
 import com.example.movietv.common.Constants.Companion.POSTER_BASE_URL
-import com.example.movietv.model.Movie
+import com.example.movietv.model.remote.Movie
 import com.example.movietv.repository.NetworkState
 import com.example.movietv.view.DetailsActivity
 import kotlinx.android.synthetic.main.item_backdrop.view.*

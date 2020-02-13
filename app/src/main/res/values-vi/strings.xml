@@ -15,5 +15,6 @@
     <string name="category">Category</string>
     <string name="genre_title">Thể loại</string>
     <string name="minutes"> phút</string>
+    <string name="mylist">Danh sách của tôi</string>
     <string name="hint_search" tools:ignore="TypographyEllipsis">Search for a movie, genre,...</string>
 </resources>

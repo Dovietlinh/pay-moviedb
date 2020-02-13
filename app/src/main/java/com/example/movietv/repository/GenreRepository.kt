@@ -2,7 +2,7 @@ package com.example.movietv.repository
 
 import androidx.lifecycle.LiveData
 import com.example.movietv.api.ApiService
-import com.example.movietv.model.GenreRespose
+import com.example.movietv.model.remote.GenreRespose
 import io.reactivex.disposables.CompositeDisposable
 
 class GenreRepository(private val apiService: ApiService) {

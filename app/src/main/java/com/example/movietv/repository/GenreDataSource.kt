@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.movietv.api.ApiService
-import com.example.movietv.model.GenreRespose
+import com.example.movietv.model.remote.GenreRespose
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 

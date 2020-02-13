@@ -17,7 +17,7 @@ import com.example.movietv.adapter.MoviePagedListAdapter
 import com.example.movietv.common.Constants.Companion.MOVIE_VIEW_TYPE
 import com.example.movietv.common.Constants.Companion.TITLE_CATEGORY
 import com.example.movietv.common.Constants.Companion.TYPE_MOVIE
-import com.example.movietv.model.Movie
+import com.example.movietv.model.remote.Movie
 import com.example.movietv.viewModel.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_category.*
 

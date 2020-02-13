@@ -157,6 +157,27 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
                 app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icCheckMyList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/ic_my_list_add"
+                android:onClick="addFavorite"
+                app:layout_constraintStart_toEndOf="@+id/rateDetails"
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:onClick="addFavorite"
+                android:text="@string/mylist"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/icCheckMyList"
+                app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -174,7 +195,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            android:text="@string/hint_search"
             android:textColor="@color/colorWhite"
             android:textSize="14sp" />
 
