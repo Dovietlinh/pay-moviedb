@@ -1,8 +1,6 @@
 package com.example.movietv.view
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,55 +12,38 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietv.R
-import com.example.movietv.adapter.MovieSearchPagedListAdapter
+import com.example.movietv.adapter.MovieFavoriteAdapter
 import com.example.movietv.viewModel.MovieViewModel
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_favorite.*
 
-class SearchFragment : Fragment() {
+class FavoriteFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
-    private lateinit var movieListAdapter: MovieSearchPagedListAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewAdapter()
     }
 
-    fun initViewAdapter() {
+    private fun initViewAdapter() {
         viewModel = getViewModel()
-        movieListAdapter = MovieSearchPagedListAdapter(context!!)
+        val movieListAdapter = MovieFavoriteAdapter(context!!)
         val linearLayoutManager = LinearLayoutManager(context)
-
-        rcvListMovieSearch?.apply {
+        rcvListMovieFavorite?.apply {
             this.setHasFixedSize(true)
             this.layoutManager = linearLayoutManager
             this.itemAnimator = DefaultItemAnimator()
-            this.adapter = movieListAdapter
+            rcvListMovieFavorite.adapter = movieListAdapter
         }
-        edtSearchMulti.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.movieSearchPagedList(s.toString()).observe(viewLifecycleOwner, Observer {
-                    movieListAdapter.submitList(it)
-                })
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                //do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                //do nothing
-            }
-
+        viewModel.getAllFavorite.observe(viewLifecycleOwner, Observer {
+            movieListAdapter.submitList(it)
         })
-
     }
 
     private fun getViewModel(): MovieViewModel {

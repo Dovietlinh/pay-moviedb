@@ -5,10 +5,12 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.movietv.api.ApiService
 import com.example.movietv.common.Constants.Companion.POST_PER_PAGE
+import com.example.movietv.model.dao.MovieDao
+import com.example.movietv.model.local.MovieDetailEntity
 import com.example.movietv.model.remote.Movie
 import io.reactivex.disposables.CompositeDisposable
 
-class MoviePagedListRepository(private val apiService: ApiService) {
+class MoviePagedListRepository(private val apiService: ApiService, movieDao: MovieDao) {
     private lateinit var moviePagedList: LiveData<PagedList<Movie>>
 
     fun fetchLiveMoviePagedList(
@@ -26,7 +28,7 @@ class MoviePagedListRepository(private val apiService: ApiService) {
         return moviePagedList
     }
 
-    fun fetchLiveMovieSeachPagedList(
+    fun fetchLiveMovieSearchPagedList(
         compositeDisposable: CompositeDisposable,
         searchString: String
     ): LiveData<PagedList<Movie>> {
@@ -42,6 +44,8 @@ class MoviePagedListRepository(private val apiService: ApiService) {
 
         return moviePagedList
     }
+
+    val getAllFavorite: LiveData<List<MovieDetailEntity>> = movieDao.getAllFavorite()
     // Todo
 //    fun getNetworkState(): LiveData<NetworkState> {
 //        return Transformations.switchMap<MovieDataSource, NetworkState>(

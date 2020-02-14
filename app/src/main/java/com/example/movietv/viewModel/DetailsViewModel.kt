@@ -41,9 +41,9 @@ class DetailsViewModel(application: Application, movieID: Int) :
         val movieDetailEntity = movieRepository.findMovieFavorite(movieID)
         movieRepository.removeMovieFavorite(movieDetailEntity)
     }
-    val getFavorite:LiveData<MovieDetailEntity> =  movieRepository.checkMovieFavorite(movieID)
 
-    val getAllFavorite: LiveData<List<MovieDetailEntity>> = movieRepository.getAllFavorite
+    val getFavorite: LiveData<MovieDetailEntity> = movieRepository.checkMovieFavorite(movieID)
+
 
     override fun onCleared() {
         super.onCleared()

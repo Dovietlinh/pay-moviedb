@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")
-                return MovieViewModel() as T
+                return MovieViewModel(activity!!.application) as T
             }
         })[MovieViewModel::class.java]
     }

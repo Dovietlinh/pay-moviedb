@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.movietv.R
+import com.example.movietv.view.FavoriteFragment
 import com.example.movietv.view.GenresFragment
 import com.example.movietv.view.HomeFragment
 import com.example.movietv.view.SearchFragment
@@ -18,7 +19,7 @@ class ViewPagerAdapter(fm: FragmentManager,vContext: Context) : FragmentPagerAda
             0 -> fragment = HomeFragment()
             1 -> fragment = GenresFragment()
             2 -> fragment = SearchFragment()
-            3 -> fragment = SearchFragment()
+            3 -> fragment = FavoriteFragment()
         }
         return fragment as Fragment
     }

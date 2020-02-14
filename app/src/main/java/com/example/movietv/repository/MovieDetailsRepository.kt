@@ -18,8 +18,6 @@ class MovieDetailsRepository(private val apiService: ApiService, private val mov
         return movieDetailsDataSource.movieResponse
     }
 
-    val getAllFavorite: LiveData<List<MovieDetailEntity>> = movieDao.getAllFavorite()
-
     fun insertMovieFavorite(movie: MovieDetailEntity) {
         movieDao.createFavorite(movie)
     }

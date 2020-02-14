@@ -51,7 +51,6 @@ class DetailsActivity : AppCompatActivity() {
             Toast.makeText(this, "Removed from My List", Toast.LENGTH_LONG).show()
             false
         }
-
     }
 
     private fun init() {
