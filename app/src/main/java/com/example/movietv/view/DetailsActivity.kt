@@ -77,7 +77,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun loadDataView(movieDetails: MovieDetails) {
         viewModel.getFavorite.observe(this, Observer {
-            if (it != null) {
+            if (it.isFavorite) {
                 icCheckMyList.setBackgroundResource(R.drawable.ic_my_list_check)
                 checkIconFavorite = true
             }

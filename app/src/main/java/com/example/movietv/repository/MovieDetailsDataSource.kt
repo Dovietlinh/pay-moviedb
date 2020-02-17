@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.movietv.api.ApiService
 import com.example.movietv.model.remote.MovieDetails
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
@@ -14,6 +15,11 @@ class MovieDetailsDataSource(
 ) {
     private val movieDetailsResponse = MutableLiveData<MovieDetails>()
     val movieResponse: LiveData<MovieDetails> get() = movieDetailsResponse
+
+    fun fetchMovie(movieId: Int): Observable<MovieDetails> {
+        return apiService.getMovieDetails(movieId)
+
+    }
 
     fun fetchMovieDetails(movieId: Int) {
         try {

@@ -25,20 +25,22 @@ class DetailsViewModel(application: Application, movieID: Int) :
     private val movieDao = MovieRoomDatabase.getDB(application).movieDao()
 
     private val compositeDisposable = CompositeDisposable()
-    val apiService = RestClient.getClient()
+    var apiService = RestClient.getClient()
     private val movieRepository: MovieDetailsRepository =
         MovieDetailsRepository(apiService, movieDao)
 
     val movieDetails: LiveData<MovieDetails> by lazy {
-        movieRepository.fetchMovieDetails(compositeDisposable, movieID)
+        movieRepository.fetchMovieCaching(compositeDisposable, movieID)
     }
 
     fun insertFavorite(movie: MovieDetailEntity) = scope.launch(Dispatchers.IO) {
+        movie.isFavorite = true
         movieRepository.insertMovieFavorite(movie)
     }
 
     fun removeFavorite(movieID: Int) = scope.launch(Dispatchers.IO) {
         val movieDetailEntity = movieRepository.findMovieFavorite(movieID)
+        movieDetailEntity.isFavorite = false
         movieRepository.removeMovieFavorite(movieDetailEntity)
     }
 
