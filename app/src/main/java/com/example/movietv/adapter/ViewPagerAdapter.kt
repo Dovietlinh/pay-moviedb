@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.movietv.R
 import com.example.movietv.view.FavoriteFragment
-import com.example.movietv.view.GenresFragment
 import com.example.movietv.view.HomeFragment
 import com.example.movietv.view.SearchFragment
 
@@ -17,24 +16,24 @@ class ViewPagerAdapter(fm: FragmentManager,vContext: Context) : FragmentPagerAda
         var fragment: Fragment? = null
         when (position) {
             0 -> fragment = HomeFragment()
-            1 -> fragment = GenresFragment()
-            2 -> fragment = SearchFragment()
-            3 -> fragment = FavoriteFragment()
+//            1 -> fragment = GenresFragment()
+            1 -> fragment = SearchFragment()
+            2 -> fragment = FavoriteFragment()
         }
         return fragment as Fragment
     }
 
     override fun getCount(): Int {
-        return 4
+        return 3
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
         var title: String? = null
         when (position) {
             0 -> title = context.getString(R.string.home)
-            1 -> title = context.getString(R.string.genre_title)
-            2 -> title = context.getString(R.string.search)
-            3 -> title = context.getString(R.string.favorite)
+//            1 -> title = context.getString(R.string.genre_title)
+            1 -> title = context.getString(R.string.search)
+            2 -> title = context.getString(R.string.favorite)
         }
         return title
     }

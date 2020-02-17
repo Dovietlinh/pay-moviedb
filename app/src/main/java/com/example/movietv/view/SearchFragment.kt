@@ -35,7 +35,7 @@ class SearchFragment : Fragment() {
         initViewAdapter()
     }
 
-    fun initViewAdapter() {
+    private fun initViewAdapter() {
         viewModel = getViewModel()
         movieListAdapter = MovieSearchPagedListAdapter(context!!)
         val linearLayoutManager = LinearLayoutManager(context)

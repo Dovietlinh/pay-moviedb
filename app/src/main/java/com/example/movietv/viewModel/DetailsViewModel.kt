@@ -2,26 +2,20 @@ package com.example.movietv.viewModel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.movietv.api.RestClient
 import com.example.movietv.model.local.MovieDetailEntity
 import com.example.movietv.model.remote.MovieDetails
 import com.example.movietv.model.roomDatabase.MovieRoomDatabase
 import com.example.movietv.repository.MovieDetailsRepository
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class DetailsViewModel(application: Application, movieID: Int) :
     ViewModel() {
-
-    private var parentJob = Job()
-    private val cContext: CoroutineContext
-        get() = parentJob + Dispatchers.Main
-    private val scope = CoroutineScope(cContext)
     private val movieDao = MovieRoomDatabase.getDB(application).movieDao()
 
     private val compositeDisposable = CompositeDisposable()
@@ -30,18 +24,19 @@ class DetailsViewModel(application: Application, movieID: Int) :
         MovieDetailsRepository(apiService, movieDao)
 
     val movieDetails: LiveData<MovieDetails> by lazy {
-        movieRepository.fetchMovieCaching(compositeDisposable, movieID)
+        val movieDetailsCache = MutableLiveData<MovieDetails>()
+        movieRepository.fetchMovieCaching(movieID).subscribe {
+            movieDetailsCache.postValue(it)
+        }
+        movieDetailsCache
     }
 
-    fun insertFavorite(movie: MovieDetailEntity) = scope.launch(Dispatchers.IO) {
-        movie.isFavorite = true
-        movieRepository.insertMovieFavorite(movie)
+    fun insertFavorite(movieID: Int) = viewModelScope.launch(Dispatchers.IO) {
+        movieRepository.insertMovieFavorite(movieID)
     }
 
-    fun removeFavorite(movieID: Int) = scope.launch(Dispatchers.IO) {
-        val movieDetailEntity = movieRepository.findMovieFavorite(movieID)
-        movieDetailEntity.isFavorite = false
-        movieRepository.removeMovieFavorite(movieDetailEntity)
+    fun removeFavorite(movieID: Int) = viewModelScope.launch(Dispatchers.IO) {
+        movieRepository.removeMovieFavorite(movieID)
     }
 
     val getFavorite: LiveData<MovieDetailEntity> = movieRepository.checkMovieFavorite(movieID)
@@ -50,6 +45,5 @@ class DetailsViewModel(application: Application, movieID: Int) :
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
-        parentJob.cancel()
     }
 }

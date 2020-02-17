@@ -20,8 +20,7 @@ class MovieFavoriteAdapter(private val context: Context) :
     ListAdapter<MovieDetailEntity, RecyclerView.ViewHolder>(MovieDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view: View
-        view = layoutInflater.inflate(R.layout.item_movie_search, parent, false)
+        val view = layoutInflater.inflate(R.layout.item_movie_search, parent, false)
         return CustomViewHolder(view)
     }
 

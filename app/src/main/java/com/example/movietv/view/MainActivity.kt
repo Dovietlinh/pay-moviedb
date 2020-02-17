@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         viewpageradapter = ViewPagerAdapter(supportFragmentManager,this@MainActivity)
         viewpagerHome.adapter = viewpageradapter
         tabContainer.setupWithViewPager(viewpagerHome)
+        tabContainer.getTabAt(0)?.setIcon(R.drawable.ic_home)
+//        tabContainer.getTabAt(1)?.setIcon(R.drawable.ic_video_library)
+        tabContainer.getTabAt(1)?.setIcon(R.drawable.ic_search_black_24dp)
+        tabContainer.getTabAt(2)?.setIcon(R.drawable.ic_favorite_border)
     }
 
     fun choosePopular(view: View) {

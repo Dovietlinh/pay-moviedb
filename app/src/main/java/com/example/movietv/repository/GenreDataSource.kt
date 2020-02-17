@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.movietv.api.ApiService
-import com.example.movietv.model.remote.GenreRespose
+import com.example.movietv.model.remote.GenreResponse
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
@@ -12,8 +12,8 @@ class GenreDataSource (
     private val apiService: ApiService,
     private val compositeDisposable: CompositeDisposable
 ) {
-    private val genreListResponse = MutableLiveData<GenreRespose>()
-    val genreResponse: LiveData<GenreRespose> get() = genreListResponse
+    private val genreListResponse = MutableLiveData<GenreResponse>()
+    val genreResponse: LiveData<GenreResponse> get() = genreListResponse
 
     fun fetchGenre() {
         try {

@@ -26,8 +26,7 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        init()
-
+        initValueCreateView()
         viewModel.movieDetails.observe(this, Observer {
             movieDetailEntity = MovieDetailEntity(
                 it.id, it.overview, it.posterPath, it.backdropPath, it.releaseDate, it.tagline,
@@ -41,7 +40,7 @@ class DetailsActivity : AppCompatActivity() {
 
     fun addFavorite(view: View) {
         checkIconFavorite = if (!checkIconFavorite) {
-            viewModel.insertFavorite(movieDetailEntity)
+            viewModel.insertFavorite(movieDetailEntity.id)
             icCheckMyList.setBackgroundResource(R.drawable.ic_my_list_check)
             Toast.makeText(this, "Added to My List", Toast.LENGTH_LONG).show()
             true
@@ -53,7 +52,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun init() {
+    private fun initValueCreateView() {
         val uri: Uri? = intent.data
         var movieId: String? = null
         if (uri != null) {
@@ -73,15 +72,15 @@ class DetailsActivity : AppCompatActivity() {
             viewModel = getViewModel(movieId)
             progress_bar.visibility = View.VISIBLE
         }
-    }
-
-    private fun loadDataView(movieDetails: MovieDetails) {
         viewModel.getFavorite.observe(this, Observer {
-            if (it.isFavorite) {
+            if (it != null) {
                 icCheckMyList.setBackgroundResource(R.drawable.ic_my_list_check)
                 checkIconFavorite = true
             }
         })
+    }
+
+    private fun loadDataView(movieDetails: MovieDetails) {
 
         titleDetails.text = movieDetails.title
         taglineDetails.text = movieDetails.tagline

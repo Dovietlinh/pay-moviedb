@@ -2,13 +2,13 @@ package com.example.movietv.repository
 
 import androidx.lifecycle.LiveData
 import com.example.movietv.api.ApiService
-import com.example.movietv.model.remote.GenreRespose
+import com.example.movietv.model.remote.GenreResponse
 import io.reactivex.disposables.CompositeDisposable
 
 class GenreRepository(private val apiService: ApiService) {
     fun fetchGenre(
         compositeDisposable: CompositeDisposable
-    ): LiveData<GenreRespose> {
+    ): LiveData<GenreResponse> {
 
         val genreDataSource = GenreDataSource(apiService, compositeDisposable)
         genreDataSource.fetchGenre()
