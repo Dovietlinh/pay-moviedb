@@ -17,7 +17,7 @@ import com.example.movietv.common.Constants.Companion.POSTER_BASE_URL
 import com.example.movietv.model.remote.Movie
 import com.example.movietv.repository.NetworkState
 import com.example.movietv.view.DetailsActivity
-import kotlinx.android.synthetic.main.item_backdrop.view.*
+import kotlinx.android.synthetic.main.item_backdrop.view.imgMovieCategory
 
 
 class MoviePagedListAdapter(private val context: Context) :

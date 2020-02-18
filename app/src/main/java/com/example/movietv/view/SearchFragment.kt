@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietv.R
 import com.example.movietv.adapter.MovieSearchPagedListAdapter
 import com.example.movietv.viewModel.MovieViewModel
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.edtSearchMulti
+import kotlinx.android.synthetic.main.fragment_search.rcvListMovieSearch
 
 class SearchFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel

@@ -10,42 +10,46 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movietv.R
+import com.example.movietv.adapter.TrailerAdapter
 import com.example.movietv.common.Constants.Companion.MOVIE_ID
 import com.example.movietv.common.Constants.Companion.POSTER_BASE_URL
-import com.example.movietv.model.local.MovieDetailEntity
+import com.example.movietv.model.local.MovieDetailLocal
 import com.example.movietv.model.remote.MovieDetails
 import com.example.movietv.viewModel.DetailsViewModel
-import kotlinx.android.synthetic.main.activity_details.*
+import kotlinx.android.synthetic.main.activity_details.dateDetails
+import kotlinx.android.synthetic.main.activity_details.icCheckMyList
+import kotlinx.android.synthetic.main.activity_details.imagePoster
+import kotlinx.android.synthetic.main.activity_details.imageViewBanner
+import kotlinx.android.synthetic.main.activity_details.progress_bar
+import kotlinx.android.synthetic.main.activity_details.rateDetails
+import kotlinx.android.synthetic.main.activity_details.rcvTrailer
+import kotlinx.android.synthetic.main.activity_details.taglineDetails
+import kotlinx.android.synthetic.main.activity_details.timeDetails
+import kotlinx.android.synthetic.main.activity_details.titleDetails
+import kotlinx.android.synthetic.main.activity_details.txtOverview
 
 class DetailsActivity : AppCompatActivity() {
     private var checkIconFavorite: Boolean = false
-    private lateinit var movieDetailEntity: MovieDetailEntity
+    private lateinit var movieDetailLocal: MovieDetailLocal
     private lateinit var viewModel: DetailsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         initValueCreateView()
-        viewModel.movieDetails.observe(this, Observer {
-            movieDetailEntity = MovieDetailEntity(
-                it.id, it.overview, it.posterPath, it.backdropPath, it.releaseDate, it.tagline,
-                it.title, it.runtime, it.rating
-            )
-            loadDataView(it)
-            progress_bar.visibility = View.GONE
-        })
-
     }
 
     fun addFavorite(view: View) {
         checkIconFavorite = if (!checkIconFavorite) {
-            viewModel.insertFavorite(movieDetailEntity.id)
+            viewModel.insertFavorite(movieDetailLocal.id)
             icCheckMyList.setBackgroundResource(R.drawable.ic_my_list_check)
             Toast.makeText(this, "Added to My List", Toast.LENGTH_LONG).show()
             true
         } else {
-            viewModel.removeFavorite(movieDetailEntity.id)
+            viewModel.removeFavorite(movieDetailLocal.id)
             icCheckMyList.setBackgroundResource(R.drawable.ic_my_list_add)
             Toast.makeText(this, "Removed from My List", Toast.LENGTH_LONG).show()
             false
@@ -78,6 +82,27 @@ class DetailsActivity : AppCompatActivity() {
                 checkIconFavorite = true
             }
         })
+        viewModel.movieDetails.observe(this, Observer {
+            movieDetailLocal = MovieDetailLocal(
+                    it.id, it.overview, it.posterPath, it.backdropPath, it.releaseDate, it.tagline,
+                    it.title, it.runtime, it.rating
+            )
+            loadDataView(it)
+            progress_bar.visibility = View.GONE
+        })
+
+        val trailerAdapter = TrailerAdapter(this)
+        val linearLayoutManager = LinearLayoutManager(this)
+        rcvTrailer?.apply {
+            this.setHasFixedSize(true)
+            this.layoutManager = linearLayoutManager
+            this.itemAnimator = DefaultItemAnimator()
+            rcvTrailer.adapter = trailerAdapter
+        }
+
+        viewModel.getTrailers.observe(this, Observer {
+            trailerAdapter.submitList(it.trailerList)
+        })
     }
 
     private fun loadDataView(movieDetails: MovieDetails) {
@@ -93,11 +118,11 @@ class DetailsActivity : AppCompatActivity() {
         val moviePosterURL = POSTER_BASE_URL + movieDetails.posterPath
         val movieBackdropURL = POSTER_BASE_URL + movieDetails.backdropPath
         Glide.with(this)
-            .load(movieBackdropURL)
-            .into(imageViewBanner)
+                .load(movieBackdropURL)
+                .into(imageViewBanner)
         Glide.with(this)
-            .load(moviePosterURL)
-            .into(imagePoster)
+                .load(moviePosterURL)
+                .into(imagePoster)
     }
 
     private fun getViewModel(movieID: Int): DetailsViewModel {

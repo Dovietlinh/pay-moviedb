@@ -7,7 +7,7 @@ import androidx.paging.PagedList
 import com.example.movietv.api.ApiService
 import com.example.movietv.api.RestClient
 import com.example.movietv.common.Constants
-import com.example.movietv.model.local.MovieDetailEntity
+import com.example.movietv.model.local.MovieDetailLocal
 import com.example.movietv.model.remote.Movie
 import com.example.movietv.model.roomDatabase.MovieRoomDatabase
 import com.example.movietv.repository.MoviePagedListRepository
@@ -51,7 +51,7 @@ class MovieViewModel(application: Application) :
         return moviePagedListRepository.fetchLiveMoviePagedList(compositeDisposable, type)
     }
 
-    val getAllFavorite: LiveData<List<MovieDetailEntity>> by lazy {
+    val getAllFavorite: LiveData<List<MovieDetailLocal>> by lazy {
         moviePagedListRepository.getAllFavorite
     }
 

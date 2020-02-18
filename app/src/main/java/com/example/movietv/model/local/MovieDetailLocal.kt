@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "db_movies")
-data class MovieDetailEntity(
+data class MovieDetailLocal(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "overview") val overview: String = "",
     @ColumnInfo(name = "posterPath") val posterPath: String = "",

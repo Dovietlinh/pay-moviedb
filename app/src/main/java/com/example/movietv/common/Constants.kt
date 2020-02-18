@@ -18,5 +18,7 @@ class Constants {
         const val TITLE_CATEGORY ="title"
         const val IS_UPCOMING_DISPLAYED ="is_upcoming_displayed"
         const val DB_NAME = "movieTV_db"
+        const val BASE_YOUTUBE_URL = "http://img.youtube.com/vi/"
+        const val ENDPOINT_YOUTUBE_URL = "/maxresdefault.jpg"
     }
 }

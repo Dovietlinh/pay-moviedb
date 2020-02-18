@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#363333"
+        android:background="@color/colorSearchBar"
         android:orientation="horizontal"
         android:weightSum="10"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,10 +40,10 @@
             android:padding="10dp"
             android:layout_weight="9"
             android:inputType="textNoSuggestions"
-            android:background="#363333"
+            android:background="@color/colorSearchBar"
             android:hint="@string/hint_search"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#DFDADA"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorTagline"
             tools:ignore="Autofill,TextFields" />
     </LinearLayout>
 

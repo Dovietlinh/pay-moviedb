@@ -13,7 +13,8 @@ import com.example.movietv.common.Constants.Companion.API_TOPRATE
 import com.example.movietv.common.Constants.Companion.API_UPCOMING
 import com.example.movietv.common.Constants.Companion.TITLE_CATEGORY
 import com.example.movietv.common.Constants.Companion.TYPE_MOVIE
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.tabContainer
+import kotlinx.android.synthetic.main.activity_main.viewpagerHome
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewpageradapter: ViewPagerAdapter

@@ -5,20 +5,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.movietv.model.local.MovieDetailEntity
+import com.example.movietv.model.local.MovieDetailLocal
 import io.reactivex.Observable
 
 @Dao
 interface MovieDao {
 
     @Query("Select * from db_movies where isFavorite = 1")
-    fun getAllFavorite(): LiveData<List<MovieDetailEntity>>
+    fun getAllFavorite(): LiveData<List<MovieDetailLocal>>
 
     @Query("SELECT * FROM db_movies WHERE id LIKE :movieID AND isFavorite = 1")
-    fun checkMovieIsFavorite(movieID: Int): LiveData<MovieDetailEntity>
+    fun checkMovieIsFavorite(movieID: Int): LiveData<MovieDetailLocal>
 
     @Query("SELECT * FROM db_movies WHERE id LIKE :movieID")
-    fun getMovie(movieID: Int): Observable<MovieDetailEntity>
+    fun getMovie(movieID: Int): Observable<MovieDetailLocal>
 
     @Query("UPDATE db_movies SET isFavorite=0 WHERE id LIKE :movieID")
     fun remoteMovieFavorite(movieID: Int)
@@ -27,8 +27,8 @@ interface MovieDao {
     fun insertMovieFavorite(movieID: Int)
 
     @Insert
-    fun saveMovie(movieDetailEntity: MovieDetailEntity)
+    fun saveMovie(movieDetailLocal: MovieDetailLocal)
 
     @Update
-    fun updateFavorite(movieDetailEntity: MovieDetailEntity)
+    fun updateFavorite(movieDetailLocal: MovieDetailLocal)
 }
