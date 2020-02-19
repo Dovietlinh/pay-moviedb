@@ -1,16 +1,14 @@
 package com.example.movietv.model.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.movietv.model.local.MovieDetailLocal
+import com.example.movietv.model.local.TrailerResponseLocal
 import io.reactivex.Observable
 
 @Dao
 interface MovieDao {
-
+    //movie detail
     @Query("Select * from db_movies where isFavorite = 1")
     fun getAllFavorite(): LiveData<List<MovieDetailLocal>>
 
@@ -31,4 +29,14 @@ interface MovieDao {
 
     @Update
     fun updateFavorite(movieDetailLocal: MovieDetailLocal)
+
+    //trailer
+    @Query("Select * from db_trailers where movieID LIKE :movieID")
+    fun getAllTrailerByID(movieID: Int): Observable<List<TrailerResponseLocal>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveTrailer(trailer: TrailerResponseLocal)
+
+    @Update
+    fun updateTrailer(trailer: TrailerResponseLocal)
 }

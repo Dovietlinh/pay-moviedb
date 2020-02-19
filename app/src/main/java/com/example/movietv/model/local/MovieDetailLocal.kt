@@ -16,4 +16,5 @@ data class MovieDetailLocal(
     @ColumnInfo(name = "runtime") val runtime: Int = 0,
     @ColumnInfo(name = "rating") val rating: Double = 0.0,
     @ColumnInfo(name = "isFavorite") var isFavorite: Boolean = false
+
 )

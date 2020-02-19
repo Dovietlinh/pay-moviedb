@@ -17,13 +17,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(application: Application, movieID: Int) :
-        ViewModel() {
+    ViewModel() {
     private val movieDao = MovieRoomDatabase.getDB(application).movieDao()
 
     private val compositeDisposable = CompositeDisposable()
     var apiService = RestClient.getClient()
     private val movieRepository: MovieDetailsRepository =
-            MovieDetailsRepository(apiService, movieDao)
+        MovieDetailsRepository(apiService, movieDao)
 
     val movieDetails: LiveData<MovieDetails> by lazy {
         val movieDetailsCache = MutableLiveData<MovieDetails>()

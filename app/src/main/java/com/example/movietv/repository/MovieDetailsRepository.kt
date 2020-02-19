@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import com.example.movietv.api.ApiService
 import com.example.movietv.model.dao.MovieDao
 import com.example.movietv.model.local.MovieDetailLocal
+import com.example.movietv.model.local.TrailerResponseLocal
 import com.example.movietv.model.remote.Genre
 import com.example.movietv.model.remote.MovieDetails
+import com.example.movietv.model.remote.Trailer
 import com.example.movietv.model.remote.TrailerResponse
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -15,8 +17,33 @@ class MovieDetailsRepository(apiService: ApiService, private val movieDao: Movie
     private var checkMovieExistDb = false
     private var checkMovieIsFavorite = false
     private val movieDetailsDataSource = MovieDetailsDataSource(apiService)
+    private var checkTrailerExistDb = false
     fun fetchTrailer(movieID: Int): Observable<TrailerResponse> {
-        return movieDetailsDataSource.fetchTrailer(movieID)
+//        return movieDetailsDataSource.fetchTrailer(movieID)
+        var getApi: Observable<TrailerResponse> = getTrailerApi(movieID)
+        var getDb: Observable<TrailerResponse> = getTrailerDb(movieID)
+        return Observable.mergeDelayError(getDb, getApi)
+    }
+
+    private fun getTrailerApi(movieID: Int): Observable<TrailerResponse> {
+        return movieDetailsDataSource.fetchTrailer(movieID).subscribeOn(Schedulers.io())
+                .doOnNext {
+                    Log.d("CachingDb", "api add")
+                    for (t in it.trailerList) {
+                        movieDao.saveTrailer(TrailerResponseLocal(t.id,it.id, t.trailerName, t.key))
+                    }
+                }
+    }
+
+    private fun getTrailerDb(movieID: Int): Observable<TrailerResponse> {
+        return movieDao.getAllTrailerByID(movieID)
+                .map {
+                    val listTrailer: MutableList<Trailer> = mutableListOf()
+                    for (t in it) {
+                        listTrailer.add(Trailer(t.id,t.key, t.name))
+                    }
+                    return@map TrailerResponse(movieID, listTrailer)
+                }
     }
 
     fun fetchMovieCaching(
@@ -34,7 +61,6 @@ class MovieDetailsRepository(apiService: ApiService, private val movieDao: Movie
 //            .delay(2L, java.util.concurrent.TimeUnit.SECONDS)
                 .doOnNext {
                     if (!checkMovieExistDb) {
-                        Log.d("CachingDb", "api add")
                         movieDao.saveMovie(
                                 MovieDetailLocal(
                                         it.id, it.overview, it.posterPath, it.backdropPath,
@@ -42,7 +68,7 @@ class MovieDetailsRepository(apiService: ApiService, private val movieDao: Movie
                                 )
                         )
                     } else {
-                        Log.d("CachingDb", "api update")
+
                         movieDao.updateFavorite(
                                 MovieDetailLocal(
                                         it.id, it.overview, it.posterPath, it.backdropPath, it.releaseDate,
@@ -59,7 +85,6 @@ class MovieDetailsRepository(apiService: ApiService, private val movieDao: Movie
                 .doOnNext {
                     checkMovieIsFavorite = it.isFavorite
                     checkMovieExistDb = true
-                    Log.d("CachingDb", "db")
                 }
                 .map {
                     return@map MovieDetails(

@@ -3,12 +3,14 @@ package com.example.movietv.model.remote
 import com.google.gson.annotations.SerializedName
 
 data class TrailerResponse(
-        val page: Int,
+        val id: Int,
         @SerializedName("results")
         val trailerList: List<Trailer>
 )
+
 data class Trailer(
-        val id: String,
+        @SerializedName(value = "id")
+        val id:String,
         @SerializedName("key")
         val key: String,
         @SerializedName("name")
