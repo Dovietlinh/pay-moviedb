@@ -3,6 +3,7 @@ package com.example.movietv.model.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.movietv.model.local.MovieDetailLocal
+import com.example.movietv.model.local.MovieResponseLocal
 import com.example.movietv.model.local.TrailerResponseLocal
 import io.reactivex.Observable
 
@@ -24,7 +25,7 @@ interface MovieDao {
     @Query("UPDATE db_movies SET isFavorite=1 WHERE id LIKE :movieID")
     fun insertMovieFavorite(movieID: Int)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveMovie(movieDetailLocal: MovieDetailLocal)
 
     @Update
@@ -39,4 +40,15 @@ interface MovieDao {
 
     @Update
     fun updateTrailer(trailer: TrailerResponseLocal)
+
+    //movieResponse
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveMovieResponse(movieResponseLocal: MovieResponseLocal)
+
+    @Query("SELECT * FROM db_moviesResponse WHERE page LIKE :page AND type LIKE :type")
+    fun getMoviesByPageAndType(page: Int, type: String): Observable<List<MovieResponseLocal>>
+
+    @Query("SELECT type FROM db_moviesResponse WHERE id LIKE :movieID")
+    fun getTypeMovieByID(movieID: Int): String
+
 }

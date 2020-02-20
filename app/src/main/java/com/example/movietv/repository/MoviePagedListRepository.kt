@@ -10,14 +10,15 @@ import com.example.movietv.model.local.MovieDetailLocal
 import com.example.movietv.model.remote.Movie
 import io.reactivex.disposables.CompositeDisposable
 
-class MoviePagedListRepository(private val apiService: ApiService, movieDao: MovieDao) {
+class MoviePagedListRepository(private val apiService: ApiService, private val movieDao: MovieDao) {
     private lateinit var moviePagedList: LiveData<PagedList<Movie>>
 
     fun fetchLiveMoviePagedList(
         compositeDisposable: CompositeDisposable,
         type: String
     ): LiveData<PagedList<Movie>> {
-        val moviesDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable, type)
+        val moviesDataSourceFactory =
+            MovieDataSourceFactory(apiService, movieDao, compositeDisposable, type)
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)

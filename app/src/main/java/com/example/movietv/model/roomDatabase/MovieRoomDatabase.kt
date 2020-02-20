@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import com.example.movietv.common.Constants.Companion.DB_NAME
 import com.example.movietv.model.dao.MovieDao
 import com.example.movietv.model.local.MovieDetailLocal
+import com.example.movietv.model.local.MovieResponseLocal
 import com.example.movietv.model.local.TrailerResponseLocal
 
 
-@Database(entities = [MovieDetailLocal::class, TrailerResponseLocal::class], version = 1)
+@Database(entities = [MovieDetailLocal::class, TrailerResponseLocal::class, MovieResponseLocal::class], version = 1)
 abstract class MovieRoomDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 
