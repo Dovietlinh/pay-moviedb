@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ViewFlipper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -12,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.movietv.R
 import com.example.movietv.adapter.MoviePagedListAdapter
 import com.example.movietv.model.remote.Movie
@@ -24,19 +27,41 @@ import kotlinx.android.synthetic.main.fragment_home.rcv_upcoming
 class HomeFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
     private lateinit var movieListAdapter: MoviePagedListAdapter
+    private lateinit var viewFlipper: ViewFlipper
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        initView(view)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        swipeRefreshLayout.setOnRefreshListener {
+            initAdapter()
+            swipeRefreshLayout.isRefreshing = false
+        }
         initAdapter()
     }
+
+    private fun initView(view: View) {
+        viewFlipper = view.findViewById(R.id.viewFlipper)
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh)
+        val imgBackground = listOf(R.drawable.img1, R.drawable.img2, R.drawable.img3)
+        for (img in imgBackground) {
+            val imageView = ImageView(context)
+            imageView.setImageResource(R.drawable.background_image_banner)
+            imageView.setBackgroundResource(img)
+            viewFlipper?.addView(imageView)
+            viewFlipper?.flipInterval = 4000
+            viewFlipper?.isAutoStart = true
+        }
+    }
+
     private fun initAdapter() {
         viewModel = getViewModel()
         //set Adapter movieList popular
@@ -95,8 +120,7 @@ class HomeFragment : Fragment() {
             this.itemAnimator = DefaultItemAnimator()
             this.adapter = movieListAdapterUpcoming
         }
-        viewModel.moviePagedListUpcoming.observe(
-            viewLifecycleOwner,
+        viewModel.moviePagedListUpcoming.observe(viewLifecycleOwner,
             Observer<PagedList<Movie>> {
                 movieListAdapterUpcoming.submitList(it)
             })
@@ -125,7 +149,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun getViewModel(): MovieViewModel{
+    private fun getViewModel(): MovieViewModel {
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")

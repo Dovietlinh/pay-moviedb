@@ -1,11 +1,10 @@
 package com.example.movietv.view
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -47,19 +46,17 @@ class SearchFragment : Fragment() {
             this.itemAnimator = DefaultItemAnimator()
             this.adapter = movieListAdapter
         }
-        edtSearchMulti.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.movieSearchPagedList(s.toString()).observe(viewLifecycleOwner, Observer {
-                    movieListAdapter.submitList(it)
-                })
+        edtSearchMulti.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(textSearch: String): Boolean {
+                viewModel.movieSearchPagedList(textSearch)
+                    .observe(viewLifecycleOwner, Observer {
+                        movieListAdapter.submitList(it)
+                    })
+                return false
             }
 
-            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                //do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                //do nothing
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
             }
 
         })

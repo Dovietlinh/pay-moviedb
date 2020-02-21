@@ -67,10 +67,12 @@ class MoviePagedListAdapter(private val context: Context) :
 
     class MovieItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie?, context: Context) {
-            val moviePosterURL = POSTER_BASE_URL + movie?.posterPath
-            Glide.with(itemView.context)
-                .load(moviePosterURL)
-                .into(itemView.imgMovieCategory)
+            if (movie?.backdropPath != null) {
+                val moviePosterURL = POSTER_BASE_URL + movie?.posterPath
+                Glide.with(itemView.context)
+                    .load(moviePosterURL)
+                    .into(itemView.imgMovieCategory)
+            }
             itemView.setOnClickListener {
                 val intent = Intent(context, DetailsActivity::class.java)
                 intent.putExtra(MOVIE_ID, movie?.id)
