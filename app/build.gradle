@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
-
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
 android {
@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.movietv"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -24,7 +24,9 @@ android {
     }
 }
 
+//noinspection SpellCheckingInspection,SpellCheckingInspection
 dependencies {
+    def room_version = "2.1.0-beta01"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -41,10 +43,10 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:26.1.0'
     //ViewModel and LiveData
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     //Recyclerview
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // Retrofit
@@ -59,11 +61,28 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
 
     // Paging
-    implementation "androidx.paging:paging-runtime:2.1.0"
+    implementation "androidx.paging:paging-runtime:2.1.1"
 
     //Rx
     implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.13'
+    kapt 'com.google.dagger:dagger-compiler:2.13'
+
+    implementation 'com.google.firebase:firebase-config:16.1.0' // Remote Config gradle dependency
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'// Firebase gradle dependency
+
+    //Api Youtube
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }
