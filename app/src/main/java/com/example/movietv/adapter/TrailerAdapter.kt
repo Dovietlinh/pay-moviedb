@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.movietv.R
 import com.example.movietv.common.Constants.Companion.BASE_YOUTUBE_URL
 import com.example.movietv.common.Constants.Companion.ENDPOINT_YOUTUBE_URL
-import com.example.movietv.model.remote.Trailer
+import com.example.movietv.data.remote.entity.Trailer
 import com.google.android.youtube.player.YouTubeIntents
 import kotlinx.android.synthetic.main.item_movie_search.view.txtTitleSearch
 import kotlinx.android.synthetic.main.item_trailer.view.imgTrailer
@@ -52,13 +52,13 @@ class TrailerAdapter(private val context: Context) : ListAdapter<Trailer, Recycl
 
     class MovieDiffCallback : DiffUtil.ItemCallback<Trailer>() {
         override fun areItemsTheSame(
-                oldItem: Trailer,
-                newItem: Trailer
+            oldItem: Trailer,
+            newItem: Trailer
         ): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-                oldItem: Trailer,
-                newItem: Trailer
+            oldItem: Trailer,
+            newItem: Trailer
         ): Boolean = oldItem == newItem
     }
 }

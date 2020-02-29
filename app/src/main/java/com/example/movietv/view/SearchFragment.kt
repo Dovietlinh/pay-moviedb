@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_search.rcvListMovieSearch
 class SearchFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
     private lateinit var movieListAdapter: MovieSearchPagedListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -17,7 +17,7 @@ import com.example.movietv.adapter.MoviePagedListAdapter
 import com.example.movietv.common.Constants.Companion.MOVIE_VIEW_TYPE
 import com.example.movietv.common.Constants.Companion.TITLE_CATEGORY
 import com.example.movietv.common.Constants.Companion.TYPE_MOVIE
-import com.example.movietv.model.remote.Movie
+import com.example.movietv.data.remote.entity.Movie
 import com.example.movietv.viewModel.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_category.progress_bar
 import kotlinx.android.synthetic.main.fragment_category.rcvCategory
@@ -29,6 +29,7 @@ class CategoryFragment : Fragment() {
     private lateinit var movieListAdapter: MoviePagedListAdapter
     private var type: String? = null
     private var title: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -1,15 +1,10 @@
 package com.example.movietv.view
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -17,27 +12,23 @@ import com.example.movietv.R
 import com.example.movietv.adapter.TrailerAdapter
 import com.example.movietv.common.Constants.Companion.MOVIE_ID
 import com.example.movietv.common.Constants.Companion.POSTER_BASE_URL
-import com.example.movietv.model.local.MovieDetailLocal
-import com.example.movietv.model.remote.MovieDetails
+import com.example.movietv.data.local.entity.MovieDetailLocal
+import com.example.movietv.data.remote.entity.MovieDetails
 import com.example.movietv.viewModel.DetailsViewModel
-import kotlinx.android.synthetic.main.activity_details.dateDetails
-import kotlinx.android.synthetic.main.activity_details.icCheckMyList
-import kotlinx.android.synthetic.main.activity_details.imagePoster
-import kotlinx.android.synthetic.main.activity_details.imageViewBanner
-import kotlinx.android.synthetic.main.activity_details.progress_bar
-import kotlinx.android.synthetic.main.activity_details.rateDetails
-import kotlinx.android.synthetic.main.activity_details.rcvTrailer
-import kotlinx.android.synthetic.main.activity_details.taglineDetails
-import kotlinx.android.synthetic.main.activity_details.timeDetails
-import kotlinx.android.synthetic.main.activity_details.titleDetails
-import kotlinx.android.synthetic.main.activity_details.txtOverview
+import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_details.*
+import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity() {
     private var checkIconFavorite: Boolean = false
     private lateinit var movieDetailLocal: MovieDetailLocal
-    private lateinit var viewModel: DetailsViewModel
+
+    @Inject
+    lateinit var viewModel: DetailsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         setContentView(R.layout.activity_details)
         initValueCreateView()
     }
@@ -57,32 +48,35 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun initValueCreateView() {
-        val uri: Uri? = intent.data
-        var movieId: String? = null
-        if (uri != null) {
-            if ("http" == uri.scheme && "movieDb.com" == uri.host) {
-                try {
-                    movieId = uri.getQueryParameter("movieId")
-                    if (movieId != null) {
-                        viewModel = getViewModel(movieId.toInt())
-                    }
-
-                } catch (e: Exception) {
-                    Log.d("HomeFragment", e.message)
-                }
-            }
-        } else {
-            val movieId: Int = intent.getIntExtra(MOVIE_ID, 1)
-            viewModel = getViewModel(movieId)
-            progress_bar.visibility = View.VISIBLE
-        }
-        viewModel.getFavorite.observe(this, Observer {
+//        val uri: Uri? = intent.data
+//        var movieId: String? = null
+//        if (uri != null) {
+//            if ("http" == uri.scheme && "movieDb.com" == uri.host) {
+//                try {
+//                    movieId = uri.getQueryParameter("movieId")
+//                    if (movieId != null) {
+//                        viewModel = getViewModel(movieId.toInt())
+//                    }
+//
+//                } catch (e: Exception) {
+//                    Log.d("HomeFragment", e.message)
+//                }
+//            }
+//        } else {
+//            val movieId: Int = intent.getIntExtra(MOVIE_ID, 1)
+//            viewModel = getViewModel(movieId)
+//            progress_bar.visibility = View.VISIBLE
+//        }
+//
+        val movieId: Int = intent.getIntExtra(MOVIE_ID, 1)
+        progress_bar.visibility = View.VISIBLE
+        viewModel.getFavorite(movieId).observe(this, Observer {
             if (it != null) {
                 icCheckMyList.setBackgroundResource(R.drawable.ic_my_list_check)
                 checkIconFavorite = true
             }
         })
-        viewModel.movieDetails.observe(this, Observer {
+        viewModel.movieDetails(movieId).observe(this, Observer {
             movieDetailLocal = MovieDetailLocal(
                     it.id, it.overview, it.posterPath, it.backdropPath, it.releaseDate, it.tagline,
                     it.title, it.runtime, it.rating
@@ -100,7 +94,7 @@ class DetailsActivity : AppCompatActivity() {
             rcvTrailer.adapter = trailerAdapter
         }
 
-        viewModel.getTrailers.observe(this, Observer {
+        viewModel.getTrailers(movieId).observe(this, Observer {
             trailerAdapter.submitList(it.trailerList)
         })
     }
@@ -124,13 +118,13 @@ class DetailsActivity : AppCompatActivity() {
                 .load(moviePosterURL)
                 .into(imagePoster)
     }
-
-    private fun getViewModel(movieID: Int): DetailsViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                @Suppress("UNCHECKED_CAST")
-                return DetailsViewModel(application, movieID) as T
-            }
-        })[DetailsViewModel::class.java]
-    }
+//
+//    private fun getViewModel(): DetailsViewModel {
+//        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+//                @Suppress("UNCHECKED_CAST")
+//                return DetailsViewModel(application) as T
+//            }
+//        })[DetailsViewModel::class.java]
+//    }
 }

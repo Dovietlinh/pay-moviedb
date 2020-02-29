@@ -6,121 +6,115 @@
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:isScrollContainer="false">
 
-        <ScrollView
-            android:id="@+id/scroll_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutRecycleViewAll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:isScrollContainer="false">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutRecycleViewAll"
+            <ViewFlipper
+                android:id="@+id/viewFlipper"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="h,500:282"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPopular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:onClick="choosePopular"
+                android:padding="@dimen/dp_5"
+                android:text="@string/popular"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewFlipper" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_popular"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPopular" />
+
+            <TextView
+                android:id="@+id/txtNowPlaying"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:onClick="chooseNowPlaying"
+                android:padding="@dimen/dp_5"
+                android:text="@string/now_playing"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rcv_popular" />
 
-                <ViewFlipper
-                    android:id="@+id/viewFlipper"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="h,500:282"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_nowPlaying"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNowPlaying" />
 
-                <TextView
-                    android:id="@+id/txtPopular"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="choosePopular"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/popular"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewFlipper" />
+            <TextView
+                android:id="@+id/txtUpcoming"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:onClick="chooseUpcoming"
+                android:padding="@dimen/dp_5"
+                android:text="@string/upcoming"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rcv_nowPlaying" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_popular"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_180"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtPopular" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_upcoming"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtUpcoming" />
 
-                <TextView
-                    android:id="@+id/txtNowPlaying"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:onClick="chooseNowPlaying"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/now_playing"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rcv_popular" />
+            <TextView
+                android:id="@+id/txtTopRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="chooseTopRate"
+                android:padding="@dimen/dp_5"
+                android:text="@string/top_rate"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rcv_upcoming" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_nowPlaying"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_180"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtNowPlaying" />
-
-                <TextView
-                    android:id="@+id/txtUpcoming"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="chooseUpcoming"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/upcoming"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rcv_nowPlaying" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_upcoming"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_180"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtUpcoming" />
-
-                <TextView
-                    android:id="@+id/txtTopRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="chooseTopRate"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/top_rate"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rcv_upcoming" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_topRate"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_180"
-                    android:layout_marginBottom="50dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtTopRate" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_topRate"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_180"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTopRate" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"

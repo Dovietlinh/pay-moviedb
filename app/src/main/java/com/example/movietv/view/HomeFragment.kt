@@ -14,10 +14,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.movietv.R
 import com.example.movietv.adapter.MoviePagedListAdapter
-import com.example.movietv.model.remote.Movie
+import com.example.movietv.data.remote.entity.Movie
 import com.example.movietv.viewModel.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_home.rcv_nowPlaying
 import kotlinx.android.synthetic.main.fragment_home.rcv_popular
@@ -28,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
     private lateinit var movieListAdapter: MoviePagedListAdapter
     private lateinit var viewFlipper: ViewFlipper
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,16 +40,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        swipeRefreshLayout.setOnRefreshListener {
-            initAdapter()
-            swipeRefreshLayout.isRefreshing = false
-        }
         initAdapter()
     }
 
     private fun initView(view: View) {
         viewFlipper = view.findViewById(R.id.viewFlipper)
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh)
         val imgBackground = listOf(R.drawable.img1, R.drawable.img2, R.drawable.img3)
         for (img in imgBackground) {
             val imageView = ImageView(context)
@@ -59,6 +53,8 @@ class HomeFragment : Fragment() {
             viewFlipper?.addView(imageView)
             viewFlipper?.flipInterval = 4000
             viewFlipper?.isAutoStart = true
+            viewFlipper?.setInAnimation(context, android.R.anim.slide_in_left)
+            viewFlipper?.setOutAnimation(context, android.R.anim.slide_out_right)
         }
     }
 
@@ -120,6 +116,7 @@ class HomeFragment : Fragment() {
             this.itemAnimator = DefaultItemAnimator()
             this.adapter = movieListAdapterUpcoming
         }
+
         viewModel.moviePagedListUpcoming.observe(viewLifecycleOwner,
             Observer<PagedList<Movie>> {
                 movieListAdapterUpcoming.submitList(it)

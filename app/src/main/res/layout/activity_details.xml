@@ -77,27 +77,27 @@
                     app:layout_constraintStart_toEndOf="@+id/imagePoster"
                     app:layout_constraintTop_toBottomOf="@+id/titleDetails" />
 
-                <TextView
-                    android:id="@+id/titleGenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="@string/genre"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                    app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
+<!--                <TextView-->
+<!--                    android:id="@+id/titleGenre"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="10dp"-->
+<!--                    android:text="@string/genre"-->
+<!--                    android:textColor="@color/colorWhite"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imagePoster"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />-->
 
-                <TextView
-                    android:id="@+id/genreDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/titleGenre"
-                    app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
+<!--                <TextView-->
+<!--                    android:id="@+id/genreDetails"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:textColor="@color/colorWhite"-->
+<!--                    android:textSize="12sp"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/titleGenre"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />-->
 
                 <TextView
                     android:id="@+id/titleTime"
@@ -109,7 +109,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/imagePoster"
-                    app:layout_constraintTop_toBottomOf="@+id/titleGenre" />
+                    app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
 
                 <TextView
                     android:id="@+id/timeDetails"
@@ -119,7 +119,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/titleTime"
-                    app:layout_constraintTop_toBottomOf="@+id/genreDetails" />
+                    app:layout_constraintTop_toBottomOf="@+id/taglineDetails" />
 
                 <TextView
                     android:id="@+id/titleDate"

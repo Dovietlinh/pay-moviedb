@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.rcvListMovieFavorite
 
 class FavoriteFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,6 +27,7 @@ class FavoriteFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewAdapter()

@@ -12,13 +12,14 @@ import com.bumptech.glide.Glide
 import com.example.movietv.R
 import com.example.movietv.common.Constants
 import com.example.movietv.common.Constants.Companion.POSTER_BASE_URL
-import com.example.movietv.model.local.MovieDetailLocal
+import com.example.movietv.data.local.entity.MovieDetailLocal
 import com.example.movietv.view.DetailsActivity
 import kotlinx.android.synthetic.main.item_movie_search.view.imgMovieSearch
 import kotlinx.android.synthetic.main.item_movie_search.view.txtTitleSearch
 
 class MovieFavoriteAdapter(private val context: Context) :
     ListAdapter<MovieDetailLocal, RecyclerView.ViewHolder>(MovieDiffCallback()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.item_movie_search, parent, false)
@@ -46,13 +47,13 @@ class MovieFavoriteAdapter(private val context: Context) :
 
     class MovieDiffCallback : DiffUtil.ItemCallback<MovieDetailLocal>() {
         override fun areItemsTheSame(
-                oldItem: MovieDetailLocal,
-                newItem: MovieDetailLocal
+            oldItem: MovieDetailLocal,
+            newItem: MovieDetailLocal
         ): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-                oldItem: MovieDetailLocal,
-                newItem: MovieDetailLocal
+            oldItem: MovieDetailLocal,
+            newItem: MovieDetailLocal
         ): Boolean = oldItem == newItem
     }
 

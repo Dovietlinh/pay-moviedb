@@ -1,45 +1,46 @@
 package com.example.movietv.viewModel
 
-import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movietv.api.RestClient
-import com.example.movietv.model.local.MovieDetailLocal
-import com.example.movietv.model.remote.MovieDetails
-import com.example.movietv.model.remote.TrailerResponse
-import com.example.movietv.model.roomDatabase.MovieRoomDatabase
-import com.example.movietv.repository.MovieDetailsRepository
+import com.example.movietv.data.local.entity.MovieDetailLocal
+import com.example.movietv.data.remote.entity.MovieDetails
+import com.example.movietv.data.remote.entity.TrailerResponse
+import com.example.movietv.repository.movieDetailsRepository.MovieDetailsRepository
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailsViewModel(application: Application, movieID: Int) :
+class DetailsViewModel @Inject constructor(private val movieRepository: MovieDetailsRepository) :
     ViewModel() {
-    private val movieDao = MovieRoomDatabase.getDB(application).movieDao()
-
+//    private val movieDao = MovieRoomDatabase.getDB(application).movieDao()
+    init {
+        Log.d("TAG", "DetailsViewModel")
+    }
     private val compositeDisposable = CompositeDisposable()
-    var apiService = RestClient.getClient()
-    private val movieRepository: MovieDetailsRepository =
-        MovieDetailsRepository(apiService, movieDao)
+//    var apiService = RestClient().getClient()
+//    private val movieRepository: MovieDetailsRepository =
+//        MovieDetailsRepository(apiService, movieDao)
 
-    val movieDetails: LiveData<MovieDetails> by lazy {
+    fun movieDetails(movieID: Int): LiveData<MovieDetails> {
         val movieDetailsCache = MutableLiveData<MovieDetails>()
-        movieRepository.fetchMovieCaching(movieID).subscribe {
+        movieRepository.getMovieCaching(movieID).subscribe {
             movieDetailsCache.postValue(it)
         }
-        movieDetailsCache
+        return movieDetailsCache
     }
 
-    val getTrailers: LiveData<TrailerResponse> by lazy {
+    fun getTrailers(movieID: Int): LiveData<TrailerResponse> {
         val mutableLiveData = MutableLiveData<TrailerResponse>()
         movieRepository.fetchTrailer(movieID).subscribeOn(Schedulers.io())
-                .subscribe {
-                    mutableLiveData.postValue(it)
-                }
-        mutableLiveData
+            .subscribe {
+                mutableLiveData.postValue(it)
+            }
+        return mutableLiveData
     }
 
     fun insertFavorite(movieID: Int) = viewModelScope.launch(Dispatchers.IO) {
@@ -50,7 +51,9 @@ class DetailsViewModel(application: Application, movieID: Int) :
         movieRepository.removeMovieFavorite(movieID)
     }
 
-    val getFavorite: LiveData<MovieDetailLocal> = movieRepository.checkMovieFavorite(movieID)
+    fun getFavorite(movieID: Int): LiveData<MovieDetailLocal> {
+        return movieRepository.getMovieFavorite(movieID)
+    }
 
 
     override fun onCleared() {
