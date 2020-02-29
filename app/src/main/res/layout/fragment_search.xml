@@ -14,37 +14,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#363333"
+        android:background="@color/colorSearchBar"
         android:orientation="horizontal"
         android:weightSum="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/ic_search_black_24dp"
-            tools:ignore="ContentDescription" />
-
-        <EditText
+        <SearchView
             android:id="@+id/edtSearchMulti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
-            android:layout_weight="9"
-            android:inputType="textNoSuggestions"
-            android:background="#363333"
+            android:background="@color/colorTab"
             android:hint="@string/hint_search"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#DFDADA"
-            tools:ignore="Autofill,TextFields" />
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorTagline" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

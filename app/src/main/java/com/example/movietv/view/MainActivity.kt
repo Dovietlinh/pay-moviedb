@@ -13,7 +13,8 @@ import com.example.movietv.common.Constants.Companion.API_TOPRATE
 import com.example.movietv.common.Constants.Companion.API_UPCOMING
 import com.example.movietv.common.Constants.Companion.TITLE_CATEGORY
 import com.example.movietv.common.Constants.Companion.TYPE_MOVIE
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.tabContainer
+import kotlinx.android.synthetic.main.activity_main.viewpagerHome
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewpageradapter: ViewPagerAdapter
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         viewpageradapter = ViewPagerAdapter(supportFragmentManager,this@MainActivity)
         viewpagerHome.adapter = viewpageradapter
         tabContainer.setupWithViewPager(viewpagerHome)
+        tabContainer.getTabAt(0)?.setIcon(R.drawable.ic_home)
+//        tabContainer.getTabAt(1)?.setIcon(R.drawable.ic_video_library)
+        tabContainer.getTabAt(1)?.setIcon(R.drawable.ic_search_black_24dp)
+        tabContainer.getTabAt(2)?.setIcon(R.drawable.ic_favorite_border)
     }
 
     fun choosePopular(view: View) {

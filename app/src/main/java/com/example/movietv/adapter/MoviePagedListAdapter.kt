@@ -14,10 +14,10 @@ import com.example.movietv.common.Constants.Companion.MOVIE_ID
 import com.example.movietv.common.Constants.Companion.MOVIE_VIEW_TYPE
 import com.example.movietv.common.Constants.Companion.NETWORK_VIEW_TYPE
 import com.example.movietv.common.Constants.Companion.POSTER_BASE_URL
-import com.example.movietv.model.remote.Movie
+import com.example.movietv.data.remote.entity.Movie
 import com.example.movietv.repository.NetworkState
 import com.example.movietv.view.DetailsActivity
-import kotlinx.android.synthetic.main.item_backdrop.view.*
+import kotlinx.android.synthetic.main.item_backdrop.view.imgMovieCategory
 
 
 class MoviePagedListAdapter(private val context: Context) :
@@ -67,10 +67,12 @@ class MoviePagedListAdapter(private val context: Context) :
 
     class MovieItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie?, context: Context) {
-            val moviePosterURL = POSTER_BASE_URL + movie?.posterPath
-            Glide.with(itemView.context)
-                .load(moviePosterURL)
-                .into(itemView.imgMovieCategory)
+            if (movie?.backdropPath != null) {
+                val moviePosterURL = POSTER_BASE_URL + movie?.posterPath
+                Glide.with(itemView.context)
+                    .load(moviePosterURL)
+                    .into(itemView.imgMovieCategory)
+            }
             itemView.setOnClickListener {
                 val intent = Intent(context, DetailsActivity::class.java)
                 intent.putExtra(MOVIE_ID, movie?.id)

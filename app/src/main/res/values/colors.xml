@@ -7,4 +7,7 @@
     <color name="colorBackground">#161616</color>
     <color name="colorTagline">#CAC8C8</color>
     <color name="colorBackgroundViewPager">#00FFFFFF</color>
+    <color name="colorTabLayout">#0a0a0a</color>
+    <color name="colorTab">#666666</color>
+    <color name="colorSearchBar">#474747</color>
 </resources>

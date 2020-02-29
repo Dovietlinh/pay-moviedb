@@ -1,53 +1,63 @@
 package com.example.movietv.viewModel
 
-import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movietv.api.RestClient
-import com.example.movietv.model.local.MovieDetailEntity
-import com.example.movietv.model.remote.MovieDetails
-import com.example.movietv.model.roomDatabase.MovieRoomDatabase
-import com.example.movietv.repository.MovieDetailsRepository
+import androidx.lifecycle.viewModelScope
+import com.example.movietv.data.local.entity.MovieDetailLocal
+import com.example.movietv.data.remote.entity.MovieDetails
+import com.example.movietv.data.remote.entity.TrailerResponse
+import com.example.movietv.repository.movieDetailsRepository.MovieDetailsRepository
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.coroutines.CoroutineScope
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
+import javax.inject.Inject
 
-class DetailsViewModel(application: Application, movieID: Int) :
+class DetailsViewModel @Inject constructor(private val movieRepository: MovieDetailsRepository) :
     ViewModel() {
-
-    private var parentJob = Job()
-    private val cContext: CoroutineContext
-        get() = parentJob + Dispatchers.Main
-    private val scope = CoroutineScope(cContext)
-    private val movieDao = MovieRoomDatabase.getDB(application).movieDao()
-
+//    private val movieDao = MovieRoomDatabase.getDB(application).movieDao()
+    init {
+        Log.d("TAG", "DetailsViewModel")
+    }
     private val compositeDisposable = CompositeDisposable()
-    val apiService = RestClient.getClient()
-    private val movieRepository: MovieDetailsRepository =
-        MovieDetailsRepository(apiService, movieDao)
+//    var apiService = RestClient().getClient()
+//    private val movieRepository: MovieDetailsRepository =
+//        MovieDetailsRepository(apiService, movieDao)
 
-    val movieDetails: LiveData<MovieDetails> by lazy {
-        movieRepository.fetchMovieDetails(compositeDisposable, movieID)
+    fun movieDetails(movieID: Int): LiveData<MovieDetails> {
+        val movieDetailsCache = MutableLiveData<MovieDetails>()
+        movieRepository.getMovieCaching(movieID).subscribe {
+            movieDetailsCache.postValue(it)
+        }
+        return movieDetailsCache
     }
 
-    fun insertFavorite(movie: MovieDetailEntity) = scope.launch(Dispatchers.IO) {
-        movieRepository.insertMovieFavorite(movie)
+    fun getTrailers(movieID: Int): LiveData<TrailerResponse> {
+        val mutableLiveData = MutableLiveData<TrailerResponse>()
+        movieRepository.fetchTrailer(movieID).subscribeOn(Schedulers.io())
+            .subscribe {
+                mutableLiveData.postValue(it)
+            }
+        return mutableLiveData
     }
 
-    fun removeFavorite(movieID: Int) = scope.launch(Dispatchers.IO) {
-        val movieDetailEntity = movieRepository.findMovieFavorite(movieID)
-        movieRepository.removeMovieFavorite(movieDetailEntity)
+    fun insertFavorite(movieID: Int) = viewModelScope.launch(Dispatchers.IO) {
+        movieRepository.insertMovieFavorite(movieID)
     }
-    val getFavorite:LiveData<MovieDetailEntity> =  movieRepository.checkMovieFavorite(movieID)
 
-    val getAllFavorite: LiveData<List<MovieDetailEntity>> = movieRepository.getAllFavorite
+    fun removeFavorite(movieID: Int) = viewModelScope.launch(Dispatchers.IO) {
+        movieRepository.removeMovieFavorite(movieID)
+    }
+
+    fun getFavorite(movieID: Int): LiveData<MovieDetailLocal> {
+        return movieRepository.getMovieFavorite(movieID)
+    }
+
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
-        parentJob.cancel()
     }
 }

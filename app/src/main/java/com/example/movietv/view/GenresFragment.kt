@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movietv.R
 import com.example.movietv.adapter.MoviePagedListAdapter
-import com.example.movietv.model.remote.Genre
+import com.example.movietv.data.remote.entity.Genre
 import com.example.movietv.viewModel.GenreViewModel
 
 class GenresFragment : Fragment() {
