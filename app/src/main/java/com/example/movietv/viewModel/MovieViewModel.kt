@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class MovieViewModel :
     ViewModel() {
+    //test git viewmodel
     private val compositeDisposable = CompositeDisposable()
     val apiService: ApiService = RestClient.getClient()
     private val moviePagedListRepository = MoviePagedListRepository(apiService)
