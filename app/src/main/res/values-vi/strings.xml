@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Movie TV</string>
+    <string name="popular">Phổ biến</string>
+    <string name="home">Trang chủ</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="now_playing">Đang chiếu</string>
+    <string name="upcoming">Sắp chiếu</string>
+    <string name="top_rate">Bình chọn cao</string>
+    <string name="genre">Thể loại: </string>
+    <string name="runtime">Thời lượng: </string>
+    <string name="date">Ngày ra mắt: </string>
+    <string name="overview">Overview</string>
+    <string name="trailer">Trailer</string>
+    <string name="category">Category</string>
+    <string name="genre_title">Thể loại</string>
+    <string name="minutes"> phút</string>
+    <string name="mylist">Danh sách của tôi</string>
+    <string name="hint_search" tools:ignore="TypographyEllipsis">Search for a movie, genre,...</string>
+</resources>
