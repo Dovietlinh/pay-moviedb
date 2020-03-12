@@ -14,5 +14,6 @@ class DetailsActivityViewModel(private val movieRepository : MovieDetailsReposit
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
+        //test
     }
 }
