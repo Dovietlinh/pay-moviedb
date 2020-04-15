@@ -52,7 +52,8 @@ class HomeFragment : Fragment() {
         viewModel.moviePagedList.observe(viewLifecycleOwner, Observer<PagedList<Movie>> {
             movieListAdapter.submitList(it)
         })
-
+        
+        //remote config firebase
         val remoteConfig = FirebaseRemoteConfig.getInstance()
         remoteConfig.setConfigSettings(
             FirebaseRemoteConfigSettings.Builder()
