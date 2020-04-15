@@ -33,6 +33,7 @@ class DetailsViewModel(application: Application, movieID: Int) :
         movieRepository.fetchMovieDetails(compositeDisposable, movieID)
     }
 
+    //add favorite
     fun insertFavorite(movie: MovieDetailEntity) = scope.launch(Dispatchers.IO) {
         movieRepository.insertMovieFavorite(movie)
     }
@@ -41,8 +42,10 @@ class DetailsViewModel(application: Application, movieID: Int) :
         val movieDetailEntity = movieRepository.findMovieFavorite(movieID)
         movieRepository.removeMovieFavorite(movieDetailEntity)
     }
+    //get favorite
     val getFavorite:LiveData<MovieDetailEntity> =  movieRepository.checkMovieFavorite(movieID)
 
+    //get all favorite
     val getAllFavorite: LiveData<List<MovieDetailEntity>> = movieRepository.getAllFavorite
 
     override fun onCleared() {

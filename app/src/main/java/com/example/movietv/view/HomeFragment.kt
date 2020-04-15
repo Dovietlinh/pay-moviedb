@@ -53,6 +53,7 @@ class HomeFragment : Fragment() {
             movieListAdapter.submitList(it)
         })
 
+        //remote config firebase
         val remoteConfig = FirebaseRemoteConfig.getInstance()
         remoteConfig.setConfigSettings(
             FirebaseRemoteConfigSettings.Builder()
