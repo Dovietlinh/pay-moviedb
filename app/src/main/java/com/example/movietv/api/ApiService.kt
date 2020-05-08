@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+//Test push git
 interface ApiService {
     @GET("movie/{path}")
     fun getMoviesByType(@Path("path") path:String, @Query("page") page: Int): Observable<MovieRespose>
